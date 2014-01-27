@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="MyBatisSpringMVCDemo"
+  id="myeclipse.1390786539704"
+  context-root="/MyBatisSpringMVCDemo"
+  j2ee-spec="6.0"
+  archive="MyBatisSpringMVCDemo.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
