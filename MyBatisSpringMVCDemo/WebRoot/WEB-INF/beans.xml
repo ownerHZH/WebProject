@@ -11,7 +11,7 @@
     http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
     <!-- 引入jdbc配置文件 -->
-	<context:property-placeholder location="classpath:jdbc.properties" />
+	<context:property-placeholder location="/WEB-INF/jdbc.properties" />
 	
 	<!-- config db property file location -->
 <!-- 	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -41,7 +41,7 @@
   	<!-- 创建SqlSessionFactory，同时指定数据源-->   
      <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">    
      <property name="dataSource" ref="dataSource" /> 
-     <property name="configLocation" value="classpath:sqlMapConfig.xml"></property>
+     <property name="configLocation" value="/WEB-INF/sqlMapConfig.xml"></property>
      </bean>    
 
 

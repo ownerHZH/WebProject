@@ -10,7 +10,7 @@
   <!-- 配置文件位置，默认为/WEB-INF/applicationContext.xml -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:beans.xml</param-value>
+		<param-value>/WEB-INF/beans.xml</param-value>
 	</context-param>
   
   <!-- 字符集过滤器 -->
@@ -39,7 +39,7 @@
 		<!-- 配置文件 -->
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath:context-dispatcher.xml</param-value>
+			<param-value>/WEB-INF/context-dispatcher.xml</param-value>
 		</init-param>
 	</servlet>
 	<servlet-mapping>

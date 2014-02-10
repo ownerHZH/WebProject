@@ -33,7 +33,8 @@ public class ContactController {
                     "Last Name:" + contact.getLastname());
         return "redirect:contacts.html";
     }
-    @RequestMapping("/contacts")
+    
+    @RequestMapping("/contact")
     public ModelAndView showContacts() {
         return new ModelAndView("contact", "command", new Contact());
     }
