@@ -5,14 +5,15 @@
 <script type="text/javascript">
 window.onload=function(){
    var menu=document.getElementById("menu");
-   var lis=document.getElementsByTagName("li");
+   var lis=menu.getElementsByTagName("li");
    var iframe=document.getElementById("content_iframe");
    for( var i=0;i<lis.length;i++)
    {
-	   lis.item(i).onclick=function(){
-		   alert((i+1)%4);
-		   iframe.src="WEB-INF/pages/content"+((i+1)%4)+".html";
-		   }
+	    (function(x){
+            lis[x].onclick=function(){
+				iframe.src="WEB-INF/pages/content"+((x+1)%4)+".html";
+				}
+        })(i);
    }
 }
 </script>
