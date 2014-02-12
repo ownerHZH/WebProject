@@ -1,324 +1,429 @@
-/*==============================================================*/
-/* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2014-02-10 11:22:21                          */
-/*==============================================================*/
+/*
+Navicat MySQL Data Transfer
 
+Source Server         : localhost_3306
+Source Server Version : 50527
+Source Host           : localhost:3306
+Source Database       : teachingplatform
 
-drop table if exists Role;
+Target Server Type    : MYSQL
+Target Server Version : 50527
+File Encoding         : 65001
 
-drop table if exists Course;
+Date: 2014-02-12 15:09:11
+*/
 
-drop table if exists CourseCategory;
+SET FOREIGN_KEY_CHECKS=0;
 
-drop table if exists Courseware;
+-- ----------------------------
+-- Table structure for `course`
+-- ----------------------------
+DROP TABLE IF EXISTS `course`;
+CREATE TABLE `course` (
+  `course_code` varchar(10) NOT NULL,
+  `course_category_code` varchar(2) DEFAULT NULL,
+  `course_name` varchar(30) DEFAULT NULL,
+  `course_english_name` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`course_code`),
+  KEY `FK_Re_Course_CoueseCategory` (`course_category_code`),
+  CONSTRAINT `FK_Re_Course_CoueseCategory` FOREIGN KEY (`course_category_code`) REFERENCES `coursecategory` (`course_category_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-drop table if exists ExamDatebase;
+-- ----------------------------
+-- Records of course
+-- ----------------------------
 
-drop table if exists Homework;
+-- ----------------------------
+-- Table structure for `coursecategory`
+-- ----------------------------
+DROP TABLE IF EXISTS `coursecategory`;
+CREATE TABLE `coursecategory` (
+  `course_category_code` varchar(2) NOT NULL,
+  `course_category_name` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`course_category_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-drop table if exists Major;
+-- ----------------------------
+-- Records of coursecategory
+-- ----------------------------
 
-drop table if exists Questions;
+-- ----------------------------
+-- Table structure for `courseware`
+-- ----------------------------
+DROP TABLE IF EXISTS `courseware`;
+CREATE TABLE `courseware` (
+  `course_code` varchar(10) DEFAULT NULL,
+  `courseware_name` varchar(20) DEFAULT NULL,
+  `courseware_path` varchar(100) DEFAULT NULL,
+  KEY `FK_Re_Course_Courseware` (`course_code`),
+  CONSTRAINT `FK_Re_Course_Courseware` FOREIGN KEY (`course_code`) REFERENCES `course` (`course_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-drop table if exists Re_Course_Major;
+-- ----------------------------
+-- Records of courseware
+-- ----------------------------
 
-drop table if exists Re_Student_Course;
+-- ----------------------------
+-- Table structure for `examdatebase`
+-- ----------------------------
+DROP TABLE IF EXISTS `examdatebase`;
+CREATE TABLE `examdatebase` (
+  `exam_datebase_code` int(11) NOT NULL,
+  `course_code` varchar(10) DEFAULT NULL,
+  `questions_code` varchar(2) DEFAULT NULL,
+  `exam_datebase_stem` text,
+  `exam_datebase_subordinate` int(11) DEFAULT NULL,
+  `exam_datebase_objective_answer` varchar(4) DEFAULT NULL,
+  `exam_datebase_reference_answer` text,
+  PRIMARY KEY (`exam_datebase_code`),
+  KEY `FK_Re_Course_ExamDatebase` (`course_code`),
+  KEY `FK_Re_Questions_ExamDatebase` (`questions_code`),
+  CONSTRAINT `FK_Re_Questions_ExamDatebase` FOREIGN KEY (`questions_code`) REFERENCES `questions` (`questions_code`),
+  CONSTRAINT `FK_Re_Course_ExamDatebase` FOREIGN KEY (`course_code`) REFERENCES `course` (`course_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-drop table if exists Re_Teacher_Course;
+-- ----------------------------
+-- Records of examdatebase
+-- ----------------------------
 
-drop table if exists Student;
+-- ----------------------------
+-- Table structure for `homework`
+-- ----------------------------
+DROP TABLE IF EXISTS `homework`;
+CREATE TABLE `homework` (
+  `course_code` varchar(10) DEFAULT NULL,
+  `homework_name` varchar(20) DEFAULT NULL,
+  `homework_path` varchar(100) DEFAULT NULL,
+  KEY `FK_Re_Course_Homework` (`course_code`),
+  CONSTRAINT `FK_Re_Course_Homework` FOREIGN KEY (`course_code`) REFERENCES `course` (`course_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-drop table if exists Supplementary;
+-- ----------------------------
+-- Records of homework
+-- ----------------------------
 
-drop table if exists Syllabuses;
+-- ----------------------------
+-- Table structure for `major`
+-- ----------------------------
+DROP TABLE IF EXISTS `major`;
+CREATE TABLE `major` (
+  `major_code` int(11) NOT NULL,
+  `major_name` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`major_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-drop table if exists Teacher;
+-- ----------------------------
+-- Records of major
+-- ----------------------------
 
-drop table if exists TestPaper;
+-- ----------------------------
+-- Table structure for `menulevelone`
+-- ----------------------------
+DROP TABLE IF EXISTS `menulevelone`;
+CREATE TABLE `menulevelone` (
+  `menu_level_one_id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_code` int(11) DEFAULT NULL,
+  `menu_level_one_name` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`menu_level_one_id`),
+  KEY `FK_Re_Role_MenuLevelOne` (`role_code`),
+  CONSTRAINT `FK_Re_Role_MenuLevelOne` FOREIGN KEY (`role_code`) REFERENCES `role` (`role_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
-drop table if exists User;
+-- ----------------------------
+-- Records of menulevelone
+-- ----------------------------
+INSERT INTO `menulevelone` VALUES ('1', '6', '系统维护');
+INSERT INTO `menulevelone` VALUES ('2', '6', '专业介绍');
+INSERT INTO `menulevelone` VALUES ('3', '6', '课程体系');
+INSERT INTO `menulevelone` VALUES ('4', '6', '师资情况');
+INSERT INTO `menulevelone` VALUES ('5', '6', '大纲');
+INSERT INTO `menulevelone` VALUES ('6', '6', '课件');
+INSERT INTO `menulevelone` VALUES ('7', '6', '教辅资料');
+INSERT INTO `menulevelone` VALUES ('8', '6', '教学录相');
+INSERT INTO `menulevelone` VALUES ('9', '6', '作业');
+INSERT INTO `menulevelone` VALUES ('10', '6', '在线测试');
+INSERT INTO `menulevelone` VALUES ('11', '6', '实战演练');
+INSERT INTO `menulevelone` VALUES ('12', '6', '互动平台');
 
-drop table if exists Videotapes;
+-- ----------------------------
+-- Table structure for `menulevelthree`
+-- ----------------------------
+DROP TABLE IF EXISTS `menulevelthree`;
+CREATE TABLE `menulevelthree` (
+  `menu_level_three_id` int(11) NOT NULL AUTO_INCREMENT,
+  `menu_level_two_id` int(11) DEFAULT NULL,
+  `menu_level_three_name` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`menu_level_three_id`),
+  KEY `FK_Re_MenuLevelTwo_MenuLevelThree` (`menu_level_two_id`),
+  CONSTRAINT `FK_Re_MenuLevelTwo_MenuLevelThree` FOREIGN KEY (`menu_level_two_id`) REFERENCES `menuleveltwo` (`menu_level_two_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
-/*==============================================================*/
-/* Table: Role                                             */
-/*==============================================================*/
-create table Role
-(
-   role_code       int not null,
-   role_name       varchar(16),
-   role_comment    varchar(10),
-   primary key (role_code)
-);
+-- ----------------------------
+-- Records of menulevelthree
+-- ----------------------------
+INSERT INTO `menulevelthree` VALUES ('1', '1', '添加角色');
+INSERT INTO `menulevelthree` VALUES ('2', '1', '角色权限设置');
+INSERT INTO `menulevelthree` VALUES ('3', '1', '教师用户导入');
+INSERT INTO `menulevelthree` VALUES ('4', '1', '学生用户导入');
+INSERT INTO `menulevelthree` VALUES ('5', '1', '添加/修改用户');
+INSERT INTO `menulevelthree` VALUES ('6', '1', '修改密码');
+INSERT INTO `menulevelthree` VALUES ('7', '2', '添加方向');
+INSERT INTO `menulevelthree` VALUES ('8', '2', '浏览/修改方向');
+INSERT INTO `menulevelthree` VALUES ('9', '3', '添加性质');
+INSERT INTO `menulevelthree` VALUES ('10', '3', '浏览/修改性质');
+INSERT INTO `menulevelthree` VALUES ('11', '4', '添加题型');
+INSERT INTO `menulevelthree` VALUES ('12', '4', '浏览/修改题型');
 
-/*==============================================================*/
-/* Table: Course                                                */
-/*==============================================================*/
-create table Course
-(
-   course_code          varchar(10) not null,
-   course_category_code varchar(2),
-   course_name          varchar(30),
-   course_english_name  varchar(50),
-   primary key (course_code)
-);
+-- ----------------------------
+-- Table structure for `menuleveltwo`
+-- ----------------------------
+DROP TABLE IF EXISTS `menuleveltwo`;
+CREATE TABLE `menuleveltwo` (
+  `menu_level_two_id` int(11) NOT NULL AUTO_INCREMENT,
+  `menu_level_one_id` int(11) DEFAULT NULL,
+  `menu_level_two_name` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`menu_level_two_id`),
+  KEY `FK_Re_MenuLevelOne_MenuLevelTwo` (`menu_level_one_id`),
+  CONSTRAINT `FK_Re_MenuLevelOne_MenuLevelTwo` FOREIGN KEY (`menu_level_one_id`) REFERENCES `menulevelone` (`menu_level_one_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
-/*==============================================================*/
-/* Table: CourseCategory                                        */
-/*==============================================================*/
-create table CourseCategory
-(
-   course_category_code varchar(2) not null,
-   course_category_name varchar(10),
-   primary key (course_category_code)
-);
+-- ----------------------------
+-- Records of menuleveltwo
+-- ----------------------------
+INSERT INTO `menuleveltwo` VALUES ('1', '1', '用户管理');
+INSERT INTO `menuleveltwo` VALUES ('2', '1', '专业方向');
+INSERT INTO `menuleveltwo` VALUES ('3', '1', '课程性质');
+INSERT INTO `menuleveltwo` VALUES ('4', '1', '题型管理');
 
-/*==============================================================*/
-/* Table: Courseware                                            */
-/*==============================================================*/
-create table Courseware
-(
-   course_code          varchar(10),
-   courseware_name      varchar(20),
-   courseware_path      varchar(100)
-);
+-- ----------------------------
+-- Table structure for `questions`
+-- ----------------------------
+DROP TABLE IF EXISTS `questions`;
+CREATE TABLE `questions` (
+  `questions_code` varchar(2) NOT NULL,
+  `course_code` varchar(10) DEFAULT NULL,
+  `questions_name` varchar(20) DEFAULT NULL,
+  `questions_describe` varchar(20) DEFAULT NULL,
+  `questions_yes_or_no_objective` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`questions_code`),
+  KEY `FK_Re_Course_Questions` (`course_code`),
+  CONSTRAINT `FK_Re_Course_Questions` FOREIGN KEY (`course_code`) REFERENCES `course` (`course_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*==============================================================*/
-/* Table: ExamDatebase                                          */
-/*==============================================================*/
-create table ExamDatebase
-(
-   exam_datebase_code   int not null,
-   course_code          varchar(10),
-   questions_code       varchar(2),
-   exam_datebase_stem   text,
-   exam_datebase_subordinate int,
-   exam_datebase_objective_answer varchar(4),
-   exam_datebase_reference_answer text,
-   primary key (exam_datebase_code)
-);
+-- ----------------------------
+-- Records of questions
+-- ----------------------------
 
-/*==============================================================*/
-/* Table: Homework                                              */
-/*==============================================================*/
-create table Homework
-(
-   course_code          varchar(10),
-   homework_name        varchar(20),
-   homework_path        varchar(100)
-);
+-- ----------------------------
+-- Table structure for `re_course_major`
+-- ----------------------------
+DROP TABLE IF EXISTS `re_course_major`;
+CREATE TABLE `re_course_major` (
+  `course_code` varchar(10) NOT NULL,
+  `major_code` int(11) NOT NULL,
+  PRIMARY KEY (`course_code`,`major_code`),
+  KEY `FK_Re_Course_Major2` (`major_code`),
+  CONSTRAINT `FK_Re_Course_Major2` FOREIGN KEY (`major_code`) REFERENCES `major` (`major_code`),
+  CONSTRAINT `FK_Re_Course_Major` FOREIGN KEY (`course_code`) REFERENCES `course` (`course_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*==============================================================*/
-/* Table: Major                                                 */
-/*==============================================================*/
-create table Major
-(
-   major_code           int not null,
-   major_name           varchar(20),
-   primary key (major_code)
-);
+-- ----------------------------
+-- Records of re_course_major
+-- ----------------------------
 
-/*==============================================================*/
-/* Table: Questions                                             */
-/*==============================================================*/
-create table Questions
-(
-   questions_code       varchar(2) not null,
-   course_code          varchar(10),
-   questions_name       varchar(20),
-   questions_describe   varchar(20),
-   questions_yes_or_no_objective bool,
-   primary key (questions_code)
-);
+-- ----------------------------
+-- Table structure for `re_student_course`
+-- ----------------------------
+DROP TABLE IF EXISTS `re_student_course`;
+CREATE TABLE `re_student_course` (
+  `user_name` varchar(12) NOT NULL,
+  `student_code` varchar(12) NOT NULL,
+  `course_code` varchar(10) NOT NULL,
+  PRIMARY KEY (`user_name`,`student_code`,`course_code`),
+  KEY `FK_Re_Student_Course2` (`course_code`),
+  CONSTRAINT `FK_Re_Student_Course2` FOREIGN KEY (`course_code`) REFERENCES `course` (`course_code`),
+  CONSTRAINT `FK_Re_Student_Course` FOREIGN KEY (`user_name`, `student_code`) REFERENCES `student` (`user_name`, `student_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*==============================================================*/
-/* Table: Re_Course_Major                                       */
-/*==============================================================*/
-create table Re_Course_Major
-(
-   course_code          varchar(10) not null,
-   major_code           int not null,
-   primary key (course_code, major_code)
-);
+-- ----------------------------
+-- Records of re_student_course
+-- ----------------------------
 
-/*==============================================================*/
-/* Table: Re_Student_Course                                     */
-/*==============================================================*/
-create table Re_Student_Course
-(
-   user_name            varchar(12) not null,
-   student_code         varchar(12) not null,
-   course_code          varchar(10) not null,
-   primary key (user_name, student_code, course_code)
-);
+-- ----------------------------
+-- Table structure for `re_teacher_course`
+-- ----------------------------
+DROP TABLE IF EXISTS `re_teacher_course`;
+CREATE TABLE `re_teacher_course` (
+  `user_name` varchar(12) NOT NULL,
+  `teacher_code` varchar(7) NOT NULL,
+  `course_code` varchar(10) NOT NULL,
+  PRIMARY KEY (`user_name`,`teacher_code`,`course_code`),
+  KEY `FK_Re_Teacher_Course2` (`course_code`),
+  CONSTRAINT `FK_Re_Teacher_Course2` FOREIGN KEY (`course_code`) REFERENCES `course` (`course_code`),
+  CONSTRAINT `FK_Re_Teacher_Course` FOREIGN KEY (`user_name`, `teacher_code`) REFERENCES `teacher` (`user_name`, `teacher_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*==============================================================*/
-/* Table: Re_Teacher_Course                                     */
-/*==============================================================*/
-create table Re_Teacher_Course
-(
-   user_name            varchar(12) not null,
-   teacher_code         varchar(7) not null,
-   course_code          varchar(10) not null,
-   primary key (user_name, teacher_code, course_code)
-);
+-- ----------------------------
+-- Records of re_teacher_course
+-- ----------------------------
 
-/*==============================================================*/
-/* Table: Student                                               */
-/*==============================================================*/
-create table Student
-(
-   user_name            varchar(12) not null,
-   student_code         varchar(12) not null,
-   major_code           int,
-   role_code       int,
-   user_password        varchar(20),
-   student_name         varchar(10),
-   student_sex          varchar(4),
-   student_birthday     datetime,
-   student_grade        varchar(4),
-   student_graduation_date datetime,
-   primary key (user_name, student_code)
-);
+-- ----------------------------
+-- Table structure for `role`
+-- ----------------------------
+DROP TABLE IF EXISTS `role`;
+CREATE TABLE `role` (
+  `role_code` int(11) NOT NULL,
+  `role_name` varchar(16) DEFAULT NULL,
+  `role_comment` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`role_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*==============================================================*/
-/* Table: Supplementary                                         */
-/*==============================================================*/
-create table Supplementary
-(
-   course_code          varchar(10),
-   supplementary_name   varchar(20),
-   supplementary_path   varchar(100)
-);
+-- ----------------------------
+-- Records of role
+-- ----------------------------
+INSERT INTO `role` VALUES ('1', '游客', '游客');
+INSERT INTO `role` VALUES ('2', '学生', '学生');
+INSERT INTO `role` VALUES ('3', '教师', '教师');
+INSERT INTO `role` VALUES ('4', '教学管理员', '教学管理员');
+INSERT INTO `role` VALUES ('5', '系主任', '系主任');
+INSERT INTO `role` VALUES ('6', '系统管理员', '系统管理员');
 
-/*==============================================================*/
-/* Table: Syllabuses                                            */
-/*==============================================================*/
-create table Syllabuses
-(
-   course_code          varchar(10),
-   syllabuses_name      varchar(10),
-   syllabuses_file_name varchar(30),
-   syllabuses_file_path varchar(100)
-);
+-- ----------------------------
+-- Table structure for `student`
+-- ----------------------------
+DROP TABLE IF EXISTS `student`;
+CREATE TABLE `student` (
+  `user_name` varchar(12) NOT NULL,
+  `student_code` varchar(12) NOT NULL,
+  `major_code` int(11) DEFAULT NULL,
+  `role_code` int(11) DEFAULT NULL,
+  `user_password` varchar(20) DEFAULT NULL,
+  `student_name` varchar(10) DEFAULT NULL,
+  `student_sex` varchar(4) DEFAULT NULL,
+  `student_birthday` datetime DEFAULT NULL,
+  `student_grade` varchar(4) DEFAULT NULL,
+  `student_graduation_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`user_name`,`student_code`),
+  KEY `FK_Re_Sudent_Major` (`major_code`),
+  CONSTRAINT `FK_Re_Sudent_Major` FOREIGN KEY (`major_code`) REFERENCES `major` (`major_code`),
+  CONSTRAINT `FK_In_Student_User` FOREIGN KEY (`user_name`) REFERENCES `user` (`user_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*==============================================================*/
-/* Table: Teacher                                               */
-/*==============================================================*/
-create table Teacher
-(
-   user_name            varchar(12) not null,
-   teacher_code         varchar(7) not null,
-   role_code       int,
-   user_password        varchar(20),
-   teacher_name         varchar(10),
-   teacher_sex          varchar(4),
-   teacher_birthday     datetime,
-   teacher_academic     varchar(10),
-   teacher_degree       varchar(10),
-   teacher_title        varchar(20),
-   teacher_character    int,
-   primary key (user_name, teacher_code)
-);
+-- ----------------------------
+-- Records of student
+-- ----------------------------
 
-/*==============================================================*/
-/* Table: TestPaper                                             */
-/*==============================================================*/
-create table TestPaper
-(
-   test_paper_code      int not null,
-   course_code          varchar(10),
-   user_name            varchar(12),
-   teacher_code         varchar(7),
-   test_paper_title     varchar(40),
-   test_paper_create_date datetime,
-   test_paper_change_date datetime,
-   test_paper_begin_chapter int,
-   test_paper_end_chapter int,
-   primary key (test_paper_code)
-);
+-- ----------------------------
+-- Table structure for `supplementary`
+-- ----------------------------
+DROP TABLE IF EXISTS `supplementary`;
+CREATE TABLE `supplementary` (
+  `course_code` varchar(10) DEFAULT NULL,
+  `supplementary_name` varchar(20) DEFAULT NULL,
+  `supplementary_path` varchar(100) DEFAULT NULL,
+  KEY `FK_Re_Course_Supplementary` (`course_code`),
+  CONSTRAINT `FK_Re_Course_Supplementary` FOREIGN KEY (`course_code`) REFERENCES `course` (`course_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*==============================================================*/
-/* Table: User                                                  */
-/*==============================================================*/
-create table User
-(
-   user_name            varchar(12) not null,
-   role_code       int,
-   user_password        varchar(20),
-   primary key (user_name)
-);
+-- ----------------------------
+-- Records of supplementary
+-- ----------------------------
 
-/*==============================================================*/
-/* Table: Videotapes                                            */
-/*==============================================================*/
-create table Videotapes
-(
-   course_code          varchar(10),
-   videotapes_name      varchar(20),
-   videotapes_path      varchar(100)
-);
+-- ----------------------------
+-- Table structure for `syllabuses`
+-- ----------------------------
+DROP TABLE IF EXISTS `syllabuses`;
+CREATE TABLE `syllabuses` (
+  `course_code` varchar(10) DEFAULT NULL,
+  `syllabuses_name` varchar(10) DEFAULT NULL,
+  `syllabuses_file_name` varchar(30) DEFAULT NULL,
+  `syllabuses_file_path` varchar(100) DEFAULT NULL,
+  KEY `FK_Re_Course_Syllabuses` (`course_code`),
+  CONSTRAINT `FK_Re_Course_Syllabuses` FOREIGN KEY (`course_code`) REFERENCES `course` (`course_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-alter table Course add constraint FK_Re_Course_CoueseCategory foreign key (course_category_code)
-      references CourseCategory (course_category_code) on delete restrict on update restrict;
+-- ----------------------------
+-- Records of syllabuses
+-- ----------------------------
 
-alter table Courseware add constraint FK_Re_Course_Courseware foreign key (course_code)
-      references Course (course_code) on delete restrict on update restrict;
+-- ----------------------------
+-- Table structure for `teacher`
+-- ----------------------------
+DROP TABLE IF EXISTS `teacher`;
+CREATE TABLE `teacher` (
+  `user_name` varchar(12) NOT NULL,
+  `teacher_code` varchar(7) NOT NULL,
+  `role_code` int(11) DEFAULT NULL,
+  `user_password` varchar(20) DEFAULT NULL,
+  `teacher_name` varchar(10) DEFAULT NULL,
+  `teacher_sex` varchar(4) DEFAULT NULL,
+  `teacher_birthday` datetime DEFAULT NULL,
+  `teacher_academic` varchar(10) DEFAULT NULL,
+  `teacher_degree` varchar(10) DEFAULT NULL,
+  `teacher_title` varchar(20) DEFAULT NULL,
+  `teacher_character` int(11) DEFAULT NULL,
+  PRIMARY KEY (`user_name`,`teacher_code`),
+  CONSTRAINT `FK_In_Teacher_User` FOREIGN KEY (`user_name`) REFERENCES `user` (`user_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-alter table ExamDatebase add constraint FK_Re_Course_ExamDatebase foreign key (course_code)
-      references Course (course_code) on delete restrict on update restrict;
+-- ----------------------------
+-- Records of teacher
+-- ----------------------------
 
-alter table ExamDatebase add constraint FK_Re_Questions_ExamDatebase foreign key (questions_code)
-      references Questions (questions_code) on delete restrict on update restrict;
+-- ----------------------------
+-- Table structure for `testpaper`
+-- ----------------------------
+DROP TABLE IF EXISTS `testpaper`;
+CREATE TABLE `testpaper` (
+  `test_paper_code` int(11) NOT NULL,
+  `course_code` varchar(10) DEFAULT NULL,
+  `user_name` varchar(12) DEFAULT NULL,
+  `teacher_code` varchar(7) DEFAULT NULL,
+  `test_paper_title` varchar(40) DEFAULT NULL,
+  `test_paper_create_date` datetime DEFAULT NULL,
+  `test_paper_change_date` datetime DEFAULT NULL,
+  `test_paper_begin_chapter` int(11) DEFAULT NULL,
+  `test_paper_end_chapter` int(11) DEFAULT NULL,
+  PRIMARY KEY (`test_paper_code`),
+  KEY `FK_Re_Course_TestPaper` (`course_code`),
+  KEY `FK_Re_Teacher_TestPaper` (`user_name`,`teacher_code`),
+  CONSTRAINT `FK_Re_Teacher_TestPaper` FOREIGN KEY (`user_name`, `teacher_code`) REFERENCES `teacher` (`user_name`, `teacher_code`),
+  CONSTRAINT `FK_Re_Course_TestPaper` FOREIGN KEY (`course_code`) REFERENCES `course` (`course_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-alter table Homework add constraint FK_Re_Course_Homework foreign key (course_code)
-      references Course (course_code) on delete restrict on update restrict;
+-- ----------------------------
+-- Records of testpaper
+-- ----------------------------
 
-alter table Questions add constraint FK_Re_Course_Questions foreign key (course_code)
-      references Course (course_code) on delete restrict on update restrict;
+-- ----------------------------
+-- Table structure for `user`
+-- ----------------------------
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `user_name` varchar(12) NOT NULL,
+  `role_code` int(11) DEFAULT NULL,
+  `user_password` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`user_name`),
+  KEY `FK_Re_Role_User` (`role_code`),
+  CONSTRAINT `FK_Re_Role_User` FOREIGN KEY (`role_code`) REFERENCES `role` (`role_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-alter table Re_Course_Major add constraint FK_Re_Course_Major foreign key (course_code)
-      references Course (course_code) on delete restrict on update restrict;
+-- ----------------------------
+-- Records of user
+-- ----------------------------
 
-alter table Re_Course_Major add constraint FK_Re_Course_Major2 foreign key (major_code)
-      references Major (major_code) on delete restrict on update restrict;
+-- ----------------------------
+-- Table structure for `videotapes`
+-- ----------------------------
+DROP TABLE IF EXISTS `videotapes`;
+CREATE TABLE `videotapes` (
+  `course_code` varchar(10) DEFAULT NULL,
+  `videotapes_name` varchar(20) DEFAULT NULL,
+  `videotapes_path` varchar(100) DEFAULT NULL,
+  KEY `FK_Re_Course_Videotapes` (`course_code`),
+  CONSTRAINT `FK_Re_Course_Videotapes` FOREIGN KEY (`course_code`) REFERENCES `course` (`course_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-alter table Re_Student_Course add constraint FK_Re_Student_Course foreign key (user_name, student_code)
-      references Student (user_name, student_code) on delete restrict on update restrict;
-
-alter table Re_Student_Course add constraint FK_Re_Student_Course2 foreign key (course_code)
-      references Course (course_code) on delete restrict on update restrict;
-
-alter table Re_Teacher_Course add constraint FK_Re_Teacher_Course foreign key (user_name, teacher_code)
-      references Teacher (user_name, teacher_code) on delete restrict on update restrict;
-
-alter table Re_Teacher_Course add constraint FK_Re_Teacher_Course2 foreign key (course_code)
-      references Course (course_code) on delete restrict on update restrict;
-
-alter table Student add constraint FK_In_Student_User foreign key (user_name)
-      references User (user_name) on delete restrict on update restrict;
-
-alter table Student add constraint FK_Re_Sudent_Major foreign key (major_code)
-      references Major (major_code) on delete restrict on update restrict;
-
-alter table Supplementary add constraint FK_Re_Course_Supplementary foreign key (course_code)
-      references Course (course_code) on delete restrict on update restrict;
-
-alter table Syllabuses add constraint FK_Re_Course_Syllabuses foreign key (course_code)
-      references Course (course_code) on delete restrict on update restrict;
-
-alter table Teacher add constraint FK_In_Teacher_User foreign key (user_name)
-      references User (user_name) on delete restrict on update restrict;
-
-alter table TestPaper add constraint FK_Re_Course_TestPaper foreign key (course_code)
-      references Course (course_code) on delete restrict on update restrict;
-
-alter table TestPaper add constraint FK_Re_Teacher_TestPaper foreign key (user_name, teacher_code)
-      references Teacher (user_name, teacher_code) on delete restrict on update restrict;
-
-alter table User add constraint FK_Re_Role_User foreign key (role_code)
-      references Role (role_code) on delete restrict on update restrict;
-
-alter table Videotapes add constraint FK_Re_Course_Videotapes foreign key (course_code)
-      references Course (course_code) on delete restrict on update restrict;
-
+-- ----------------------------
+-- Records of videotapes
+-- ----------------------------
