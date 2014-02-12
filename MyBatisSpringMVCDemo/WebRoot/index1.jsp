@@ -11,7 +11,8 @@ window.onload=function(){
    {
 	    (function(x){
             lis[x].onclick=function(){
-				iframe.src="WEB-INF/pages/content"+((x+1)%4)+".html";
+				var id=lis[x].id;
+				iframe.src="WEB-INF/pages/"+id+".html";
 				}
         })(i);
    }
@@ -21,8 +22,8 @@ window.onload=function(){
 <style type="text/css">
    body{ height:100%; width:100%; margin:0px; border:0px; overflow:hidden;}
    .header{ height:15%; width:100%; margin:0px; border:1px; background-image: url(WEB-INF/pictures/banner.gif); background-repeat:no-repeat; background-position:center;}
-   .menu_body{ height:75%; width:100%;}
-   .footer{height:10%; width:100%; background-color:#00C; margin:0px; border:1px;}
+   .menu_body{ height:80%; width:100%;}
+   .footer{height:5%; width:100%; background-color:#cccccc; margin:0px; border:1px; text-align:center; padding-top:0.5%;}
    .body{ height:100%; width:80%; background-color:#933; border:1px; margin:0px; float:left;}
    .menu{ height:100%; width:20%; background-color:#990; border:1px; margin:0px; float:right; overflow:auto;}
    .menu ul{ margin-top:10%; margin-left:20%;}
@@ -39,21 +40,23 @@ window.onload=function(){
       </div>
       <div id="menu" class="menu">
          <ul>
-            <li>系统维护</li>
-            <li>专业介绍</li>
-            <li>课程体系</li>
-            <li>师资情况</li>
-            <li>大纲</li>
-            <li>课件</li>
-            <li>教辅资料</li>
-            <li>教学录相</li>
-            <li>作业</li>
-            <li>在线测试</li>
-            <li>实战演练</li>
-            <li>互动平台</li>
+            <li id="system_maintenance">系统维护</li>
+            <li id="professional_introduction">专业介绍</li>
+            <li id="curriculum_system">课程体系</li>
+            <li id="teachers_qualification">师资情况</li>
+            <li id="outline">大纲</li>
+            <li id="courseware">课件</li>
+            <li id="teaching_materials">教辅资料</li>
+            <li id="teaching_video">教学录相</li>
+            <li id="homework">作业</li>
+            <li id="online_testing">在线测试</li>
+            <li id="practicing">实战演练</li>
+            <li id="interactive_platform">互动平台</li>
          </ul>
       </div>
    </div>
-   <div id="footer" class="footer"></div>
+   <div id="footer" class="footer">
+       @copyright 2014  auther:owner
+   </div>
 </body>
 </html>
