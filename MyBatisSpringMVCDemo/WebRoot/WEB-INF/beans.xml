@@ -49,5 +49,14 @@
 	<bean id="userDAO" class="com.owner.dao.impl.UserDAOImpl">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
 	</bean>
+	<bean id="menuLevelOneDAO" class="com.owner.dao.impl.MenuLevelOneDAOImpl">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+	<bean id="menuLevelTwoDAO" class="com.owner.dao.impl.MenuLevelTwoDAOImpl">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+	<bean id="menuLevelThreeDAO" class="com.owner.dao.impl.MenuLevelThreeDAOImpl">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
 
 </beans>

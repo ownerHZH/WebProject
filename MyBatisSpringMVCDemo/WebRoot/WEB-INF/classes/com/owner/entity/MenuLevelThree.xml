@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.owner.entity.MenuLevelThree">
+	<resultMap type="MenuLevelThree" id="menuLevelThreeMap">
+		<id property="menu_level_three_id" column="menu_level_three_id"></id>
+		<id property="menu_level_two_id" column="menu_level_two_id"></id>
+		<id property="menu_level_three_name" column="menu_level_three_name"></id>
+	</resultMap>
+	<select id="getMenuLevelThree" parameterType="MenuLevelThree" resultMap="menuLevelThreeMap">
+		select 
+		   menu_level_two_id,
+		   menu_level_three_id,
+		   menu_level_three_name 
+		 from menulevelthree 
+		   where menu_level_two_id=#{menu_level_two_id}
+	</select>
+	<insert id="addMenuLevelThree" parameterType="MenuLevelThree">
+		insert into menulevelthree(menu_level_two_id,menu_level_three_name) 
+		   values(#{menu_level_two_id},#{menu_level_three_name})
+	</insert>
+	<update id="updateMenuLevelThree" parameterType="MenuLevelThree">
+		update menulevelthree set 
+		   menu_level_two_id=#{menu_level_two_id},
+		   menu_level_three_name=#{menu_level_three_name} 
+		 where 
+		   menu_level_three_id=#{menu_level_three_id}
+	</update>
+</mapper>

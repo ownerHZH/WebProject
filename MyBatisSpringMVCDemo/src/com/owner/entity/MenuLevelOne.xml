@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.owner.entity.MenuLevelOne">
+	<resultMap type="MenuLevelOne" id="menuLevelOneMap">
+		<id property="menu_level_one_id" column="menu_level_one_id"></id>
+		<id property="role_code" column="role_code"></id>
+		<id property="menu_level_one_name" column="menu_level_one_name"></id>
+	</resultMap>
+	<select id="getMenuLevelOne" parameterType="MenuLevelOne" resultMap="menuLevelOneMap">
+		select 
+		   menu_level_one_id,
+		   role_code,
+		   menu_level_one_name 
+		 from menulevelone 
+		   where role_code=#{role_code}
+	</select>
+	<insert id="addMenuLevelOne" parameterType="MenuLevelOne">
+		insert into menulevelone(role_code,menu_level_one_name) 
+		   values(#{role_code},#{menu_level_one_name})
+	</insert>
+	<update id="updateMenuLevelOne" parameterType="MenuLevelOne">
+		update menulevelone set 
+		   role_code=#{role_code},
+		   menu_level_one_name=#{menu_level_one_name} 
+		 where 
+		   menu_level_one_id=#{menu_level_one_id}
+	</update>
+</mapper>

@@ -4,8 +4,14 @@
 	<!-- 别名 -->
 	<typeAliases>
 		<typeAlias type="com.owner.entity.UserTable" alias="UserTable"/>
+		<typeAlias type="com.owner.entity.MenuLevelOne" alias="MenuLevelOne"/>
+		<typeAlias type="com.owner.entity.MenuLevelTwo" alias="MenuLevelTwo"/>
+		<typeAlias type="com.owner.entity.MenuLevelThree" alias="MenuLevelThree"/>
 	</typeAliases>
 	 <mappers>  
       <mapper resource="com/owner/entity/UserTable.xml" />  
+      <mapper resource="com/owner/entity/MenuLevelOne.xml" />
+      <mapper resource="com/owner/entity/MenuLevelTwo.xml" />
+      <mapper resource="com/owner/entity/MenuLevelThree.xml" />
      </mappers>  
 </configuration>
