@@ -13,6 +13,8 @@
 		   menu_level_three_id,
 		   menu_level_three_name 
 		 from menulevelthree 
+		 where 
+		   menu_level_two_id=#{menu_level_two_id}
 	</select>
 	<insert id="addMenuLevelThree" parameterType="MenuLevelThree">
 		insert into menulevelthree(menu_level_two_id,menu_level_three_name) 
