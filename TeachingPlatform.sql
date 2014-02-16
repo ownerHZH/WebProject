@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50527
 File Encoding         : 65001
 
-Date: 2014-02-12 15:09:11
+Date: 2014-02-17 00:00:39
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -78,8 +78,8 @@ CREATE TABLE `examdatebase` (
   PRIMARY KEY (`exam_datebase_code`),
   KEY `FK_Re_Course_ExamDatebase` (`course_code`),
   KEY `FK_Re_Questions_ExamDatebase` (`questions_code`),
-  CONSTRAINT `FK_Re_Questions_ExamDatebase` FOREIGN KEY (`questions_code`) REFERENCES `questions` (`questions_code`),
-  CONSTRAINT `FK_Re_Course_ExamDatebase` FOREIGN KEY (`course_code`) REFERENCES `course` (`course_code`)
+  CONSTRAINT `FK_Re_Course_ExamDatebase` FOREIGN KEY (`course_code`) REFERENCES `course` (`course_code`),
+  CONSTRAINT `FK_Re_Questions_ExamDatebase` FOREIGN KEY (`questions_code`) REFERENCES `questions` (`questions_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -124,6 +124,7 @@ CREATE TABLE `menulevelone` (
   `menu_level_one_id` int(11) NOT NULL AUTO_INCREMENT,
   `role_code` int(11) DEFAULT NULL,
   `menu_level_one_name` varchar(20) DEFAULT NULL,
+  `mapping_page` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`menu_level_one_id`),
   KEY `FK_Re_Role_MenuLevelOne` (`role_code`),
   CONSTRAINT `FK_Re_Role_MenuLevelOne` FOREIGN KEY (`role_code`) REFERENCES `role` (`role_code`)
@@ -132,18 +133,18 @@ CREATE TABLE `menulevelone` (
 -- ----------------------------
 -- Records of menulevelone
 -- ----------------------------
-INSERT INTO `menulevelone` VALUES ('1', '6', '系统维护');
-INSERT INTO `menulevelone` VALUES ('2', '6', '专业介绍');
-INSERT INTO `menulevelone` VALUES ('3', '6', '课程体系');
-INSERT INTO `menulevelone` VALUES ('4', '6', '师资情况');
-INSERT INTO `menulevelone` VALUES ('5', '6', '大纲');
-INSERT INTO `menulevelone` VALUES ('6', '6', '课件');
-INSERT INTO `menulevelone` VALUES ('7', '6', '教辅资料');
-INSERT INTO `menulevelone` VALUES ('8', '6', '教学录相');
-INSERT INTO `menulevelone` VALUES ('9', '6', '作业');
-INSERT INTO `menulevelone` VALUES ('10', '6', '在线测试');
-INSERT INTO `menulevelone` VALUES ('11', '6', '实战演练');
-INSERT INTO `menulevelone` VALUES ('12', '6', '互动平台');
+INSERT INTO `menulevelone` VALUES ('1', '6', '系统维护', 'system_maintenance');
+INSERT INTO `menulevelone` VALUES ('2', '6', '专业介绍', 'professional_introduction');
+INSERT INTO `menulevelone` VALUES ('3', '6', '课程体系', 'curriculum_system');
+INSERT INTO `menulevelone` VALUES ('4', '6', '师资情况', 'teachers_qualification');
+INSERT INTO `menulevelone` VALUES ('5', '6', '大纲', 'outline');
+INSERT INTO `menulevelone` VALUES ('6', '6', '课件', 'courseware');
+INSERT INTO `menulevelone` VALUES ('7', '6', '教辅资料', 'teaching_materials');
+INSERT INTO `menulevelone` VALUES ('8', '6', '教学录相', 'teaching_video');
+INSERT INTO `menulevelone` VALUES ('9', '6', '作业', 'homework');
+INSERT INTO `menulevelone` VALUES ('10', '6', '在线测试', 'online_testing');
+INSERT INTO `menulevelone` VALUES ('11', '6', '实战演练', 'practicing');
+INSERT INTO `menulevelone` VALUES ('12', '6', '互动平台', 'interactive_platform');
 
 -- ----------------------------
 -- Table structure for `menulevelthree`
@@ -223,8 +224,8 @@ CREATE TABLE `re_course_major` (
   `major_code` int(11) NOT NULL,
   PRIMARY KEY (`course_code`,`major_code`),
   KEY `FK_Re_Course_Major2` (`major_code`),
-  CONSTRAINT `FK_Re_Course_Major2` FOREIGN KEY (`major_code`) REFERENCES `major` (`major_code`),
-  CONSTRAINT `FK_Re_Course_Major` FOREIGN KEY (`course_code`) REFERENCES `course` (`course_code`)
+  CONSTRAINT `FK_Re_Course_Major` FOREIGN KEY (`course_code`) REFERENCES `course` (`course_code`),
+  CONSTRAINT `FK_Re_Course_Major2` FOREIGN KEY (`major_code`) REFERENCES `major` (`major_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -241,8 +242,8 @@ CREATE TABLE `re_student_course` (
   `course_code` varchar(10) NOT NULL,
   PRIMARY KEY (`user_name`,`student_code`,`course_code`),
   KEY `FK_Re_Student_Course2` (`course_code`),
-  CONSTRAINT `FK_Re_Student_Course2` FOREIGN KEY (`course_code`) REFERENCES `course` (`course_code`),
-  CONSTRAINT `FK_Re_Student_Course` FOREIGN KEY (`user_name`, `student_code`) REFERENCES `student` (`user_name`, `student_code`)
+  CONSTRAINT `FK_Re_Student_Course` FOREIGN KEY (`user_name`, `student_code`) REFERENCES `student` (`user_name`, `student_code`),
+  CONSTRAINT `FK_Re_Student_Course2` FOREIGN KEY (`course_code`) REFERENCES `course` (`course_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -259,8 +260,8 @@ CREATE TABLE `re_teacher_course` (
   `course_code` varchar(10) NOT NULL,
   PRIMARY KEY (`user_name`,`teacher_code`,`course_code`),
   KEY `FK_Re_Teacher_Course2` (`course_code`),
-  CONSTRAINT `FK_Re_Teacher_Course2` FOREIGN KEY (`course_code`) REFERENCES `course` (`course_code`),
-  CONSTRAINT `FK_Re_Teacher_Course` FOREIGN KEY (`user_name`, `teacher_code`) REFERENCES `teacher` (`user_name`, `teacher_code`)
+  CONSTRAINT `FK_Re_Teacher_Course` FOREIGN KEY (`user_name`, `teacher_code`) REFERENCES `teacher` (`user_name`, `teacher_code`),
+  CONSTRAINT `FK_Re_Teacher_Course2` FOREIGN KEY (`course_code`) REFERENCES `course` (`course_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -305,8 +306,8 @@ CREATE TABLE `student` (
   `student_graduation_date` datetime DEFAULT NULL,
   PRIMARY KEY (`user_name`,`student_code`),
   KEY `FK_Re_Sudent_Major` (`major_code`),
-  CONSTRAINT `FK_Re_Sudent_Major` FOREIGN KEY (`major_code`) REFERENCES `major` (`major_code`),
-  CONSTRAINT `FK_In_Student_User` FOREIGN KEY (`user_name`) REFERENCES `user` (`user_name`)
+  CONSTRAINT `FK_In_Student_User` FOREIGN KEY (`user_name`) REFERENCES `user` (`user_name`),
+  CONSTRAINT `FK_Re_Sudent_Major` FOREIGN KEY (`major_code`) REFERENCES `major` (`major_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -387,8 +388,8 @@ CREATE TABLE `testpaper` (
   PRIMARY KEY (`test_paper_code`),
   KEY `FK_Re_Course_TestPaper` (`course_code`),
   KEY `FK_Re_Teacher_TestPaper` (`user_name`,`teacher_code`),
-  CONSTRAINT `FK_Re_Teacher_TestPaper` FOREIGN KEY (`user_name`, `teacher_code`) REFERENCES `teacher` (`user_name`, `teacher_code`),
-  CONSTRAINT `FK_Re_Course_TestPaper` FOREIGN KEY (`course_code`) REFERENCES `course` (`course_code`)
+  CONSTRAINT `FK_Re_Course_TestPaper` FOREIGN KEY (`course_code`) REFERENCES `course` (`course_code`),
+  CONSTRAINT `FK_Re_Teacher_TestPaper` FOREIGN KEY (`user_name`, `teacher_code`) REFERENCES `teacher` (`user_name`, `teacher_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------

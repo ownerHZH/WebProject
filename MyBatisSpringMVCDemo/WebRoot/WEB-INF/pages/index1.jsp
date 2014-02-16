@@ -1,27 +1,35 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
 <head>
+<base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>无标题文档</title>
+<script type="text/javascript" src="js/index1.js"></script>
 <script type="text/javascript">
-window.onload=function(){
-   var menu=document.getElementById("menu");
-   var lis=menu.getElementsByTagName("li");
-   var iframe=document.getElementById("content_iframe");
-   for( var i=0;i<lis.length;i++)
-   {
-	    (function(x){
-            lis[x].onclick=function(){
-				var id=lis[x].id;
-				iframe.src="WEB-INF/pages/"+id+".html";
-				}
-        })(i);
-   }
+function creatMenuLi()
+{
+    var ul=document.getElementById("menuul");
+    <c:forEach items="${menuList}" var="menu">      
+       var li= document.createElement("li");
+       var t=document.createTextNode("${menu.menu_level_one_name}");
+       li.id="${menu.mapping_page}";
+       li.appendChild(t);
+       ul.appendChild(li);
+    </c:forEach>
 }
 </script>
 
-<style type="text/css">
+<!-- <LINK REL=stylesheet HREF="css/index1.css" TYPE="text/css"> -->
+<style type="text/css" >
    body{ height:100%; width:100%; margin:0px; border:0px; overflow:hidden;}
-   .header{ height:15%; width:100%; margin:0px; border:1px; background-image: url(WEB-INF/pictures/banner.gif); background-repeat:no-repeat; background-position:center;}
+   .header{ height:15%; width:100%; margin:0px; border:1px; background-image: url(img/banner.gif); background-repeat:no-repeat; background-position:center;}
    .menu_body{ height:80%; width:100%;}
    .footer{height:5%; width:100%; background-color:#cccccc; margin:0px; border:1px; text-align:center; padding-top:0.5%;}
    .body{ height:100%; width:80%; background-color:#933; border:1px; margin:0px; float:left;}
@@ -36,11 +44,11 @@ window.onload=function(){
    <div id="header" class="header"></div>
    <div id="menu_body" class="menu_body">
       <div id="body" class="body">
-         <iframe id="content_iframe" class="content_iframe" src="WEB-INF/pages/content.html"></iframe>
+         <iframe id="content_iframe" class="content_iframe" src="pages/content.html"></iframe>
       </div>
       <div id="menu" class="menu">
-         <ul>
-            <li id="system_maintenance">系统维护</li>
+         <ul id='menuul'>
+            <!-- <li id="system_maintenance">系统维护</li>
             <li id="professional_introduction">专业介绍</li>
             <li id="curriculum_system">课程体系</li>
             <li id="teachers_qualification">师资情况</li>
@@ -51,12 +59,12 @@ window.onload=function(){
             <li id="homework">作业</li>
             <li id="online_testing">在线测试</li>
             <li id="practicing">实战演练</li>
-            <li id="interactive_platform">互动平台</li>
+            <li id="interactive_platform">互动平台</li> -->
          </ul>
       </div>
    </div>
-   <div id="footer" class="footer">
-       @copyright 2014  auther:owner
+   <div id="footer" class="footer"> 
+       @copyright 2014  auther:owner 
    </div>
 </body>
 </html>

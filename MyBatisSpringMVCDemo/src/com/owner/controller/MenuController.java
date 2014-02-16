@@ -8,6 +8,8 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.owner.dao.IMenuLevelOneDAO;
 import com.owner.dao.IMenuLevelThreeDAO;
 import com.owner.dao.IMenuLevelTwoDAO;
@@ -26,14 +28,14 @@ public class MenuController {
 	private IMenuLevelThreeDAO menuLevelThreeDAO;
 	
     @RequestMapping("/menu")
-    public String getMenu() 
+    public ModelAndView getMenu() 
     {
     	List<MenuLevelOne> menuLevelOneList=null;
     	
     	MenuLevelOne menuLevelOne=new MenuLevelOne();
     	menuLevelOne.setRole_code(6);
 		menuLevelOneList=menuLevelOneDAO.getMenuLevelOne(menuLevelOne);
-		if(menuLevelOneList!=null&&menuLevelOneList.size()>0)
+		/*if(menuLevelOneList!=null&&menuLevelOneList.size()>0)
 		{			
 			for(int i=0;i<menuLevelOneList.size();i++)
 			{
@@ -56,12 +58,12 @@ public class MenuController {
 				}
 			}
 			
-		}
+		}*/
 		for(int i=0;i<menuLevelOneList.size();i++)
 		{
 			System.out.println("==++++++==="+menuLevelOneList.get(i).toString());
 		}
-        return "";
+		return new ModelAndView("index1", "menuList", menuLevelOneList);
     }
       
 }

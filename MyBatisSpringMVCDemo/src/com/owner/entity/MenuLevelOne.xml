@@ -6,23 +6,26 @@
 		<id property="menu_level_one_id" column="menu_level_one_id"></id>
 		<id property="role_code" column="role_code"></id>
 		<id property="menu_level_one_name" column="menu_level_one_name"></id>
+		<id property="mapping_page" column="mapping_page"></id>
 	</resultMap>
 	<select id="getMenuLevelOne" parameterType="MenuLevelOne" resultMap="menuLevelOneMap">
 		select 
 		   menu_level_one_id,
 		   role_code,
-		   menu_level_one_name 
+		   menu_level_one_name,
+		   mapping_page 
 		 from menulevelone 
 		   where role_code=#{role_code}
 	</select>
 	<insert id="addMenuLevelOne" parameterType="MenuLevelOne">
-		insert into menulevelone(role_code,menu_level_one_name) 
-		   values(#{role_code},#{menu_level_one_name})
+		insert into menulevelone(role_code,menu_level_one_name,mapping_page) 
+		   values(#{role_code},#{menu_level_one_name},#{mapping_page})
 	</insert>
 	<update id="updateMenuLevelOne" parameterType="MenuLevelOne">
 		update menulevelone set 
 		   role_code=#{role_code},
-		   menu_level_one_name=#{menu_level_one_name} 
+		   menu_level_one_name=#{menu_level_one_name},
+		   mapping_page=#{mapping_page}
 		 where 
 		   menu_level_one_id=#{menu_level_one_id}
 	</update>
