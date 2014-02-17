@@ -13,25 +13,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <title>无标题文档</title>
 <script type="text/javascript" src="js/index1.js"></script>
 <script type="text/javascript">
+window.onload=function(){
+   creatMenuLi();   
+}
+
 function creatMenuLi()
 {
+    var iframe=document.getElementById("content_iframe");
     var ul=document.getElementById("menuul");
     <c:forEach items="${menuList}" var="menu">      
        var li= document.createElement("li");
        var t=document.createTextNode("${menu.menu_level_one_name}");
        li.id="${menu.mapping_page}";
+       li.onclick=function(){
+           iframe.src="${menu.mapping_page}"+".html";
+       };
        li.appendChild(t);
        ul.appendChild(li);
     </c:forEach>
 }
 </script>
 
-<!-- <LINK REL=stylesheet HREF="css/index1.css" TYPE="text/css"> -->
+<!-- <link rel=stylesheet href="css/index1.css" type="text/css"> -->
 <style type="text/css" >
    body{ height:100%; width:100%; margin:0px; border:0px; overflow:hidden;}
    .header{ height:15%; width:100%; margin:0px; border:1px; background-image: url(img/banner.gif); background-repeat:no-repeat; background-position:center;}
    .menu_body{ height:80%; width:100%;}
-   .footer{height:5%; width:100%; background-color:#cccccc; margin:0px; border:1px; text-align:center; padding-top:0.5%;}
+   .footer{height:0%; width:100%; background-color:#cccccc; margin:0px; border:1px; text-align:center; padding-top:0.5%;}
    .body{ height:100%; width:80%; background-color:#933; border:1px; margin:0px; float:left;}
    .menu{ height:100%; width:20%; background-color:#990; border:1px; margin:0px; float:right; overflow:auto;}
    .menu ul{ margin-top:10%; margin-left:20%;}
@@ -44,7 +52,7 @@ function creatMenuLi()
    <div id="header" class="header"></div>
    <div id="menu_body" class="menu_body">
       <div id="body" class="body">
-         <iframe id="content_iframe" class="content_iframe" src="pages/content.html"></iframe>
+         <iframe id="content_iframe" class="content_iframe" src="content.html"></iframe>
       </div>
       <div id="menu" class="menu">
          <ul id='menuul'>
@@ -64,7 +72,7 @@ function creatMenuLi()
       </div>
    </div>
    <div id="footer" class="footer"> 
-       @copyright 2014  auther:owner 
+       <!-- @copyright 2014  auther:owner --> 
    </div>
 </body>
 </html>

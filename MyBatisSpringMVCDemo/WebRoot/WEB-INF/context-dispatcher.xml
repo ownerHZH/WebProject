@@ -20,8 +20,7 @@
 	
 	<mvc:resources location="/img/" mapping="/img/**"/>
 	<mvc:resources location="/js/" mapping="/js/**"/>
-	<mvc:resources location="/css/" mapping="/css/**"/>
-	<mvc:resources location="/WEB-INF/pages/" mapping="/pages/**"/>
+	<!-- <mvc:resources location="/WEB-INF/pages/" mapping="/pages/**"/> -->
 	
 	<bean name="/test/static" class="com.owner.controller.StaticController">
 	     <property name="methodNameResolver">
