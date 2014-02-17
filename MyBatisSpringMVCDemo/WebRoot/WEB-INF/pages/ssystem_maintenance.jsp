@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -9,14 +10,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" src="js/jquery-1.8.2.js"></script>
     <title>系统维护页面</title>
-    <meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	
-	
+		
 	<style type="text/css">
 	   html body{ height:100%; width:100%; margin:0px; border:0px; overflow:hidden;}
 	   .menu{ border:0px; width:400px; right:0px; float:right; position:absolute;}
@@ -27,12 +23,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   .content_menu{ float:left; width:20%; height:100%; cursor:pointer; background-color:#cc0;text-align:center;}
 	   .content_menu ul{ list-style:none;}
 	   .content_menu ul li{ margin:5px;}
-	   .content_content { float:left; width:80%; height:100%; text-align:center; padding-top:15%; background-color:#990;}
+	   .content_content { display:none; float:left; width:80%; height:100%; text-align:center; padding-top:15%; background-color:#990;}
 	</style>
 	
 	<script type="text/javascript">
-	   window.onload=function(){
-	   var menu=document.getElementById("menu");
+	   /*window.onload=function(){
+	    var menu=document.getElementById("menu");
 	   var lis=menu.getElementsByTagName("li");
 	   for( var i=0;i<lis.length;i++)
 	   {
@@ -53,30 +49,58 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					};
 	        })(i);
 	   }
-	   document.getElementById("menu_li1_content").style.display="block";
-	};
+	   document.getElementById("menu_li1_content").style.display="block"; 
+	   creatMenuLi();
+	};*/
+	$(function(){
+	    creatMenuLi();
+	});
+	
+	function creatMenuLi()
+	{
+	    var oneul=document.getElementById("menu_one_ul");
+	    <c:forEach items="${menulist}" var="menu">      
+	       var oneli= document.createElement("li");
+	       var t=document.createTextNode("${menu.menu_level_two_name}");
+	       oneli.onclick=function(){
+	           var twoul=document.getElementById("menu_two_ul");
+	           $("#menu_two_ul").empty();
+	           <c:forEach items="${menu.menuLevelThreeList}" var="menu_two">
+	              var twoli= document.createElement("li");
+	              var twot=document.createTextNode("${menu_two.menu_level_three_name}");
+	              twoli.onclick=function(){
+	                 //document.getElementById("menu_li1_content_content").style.display="block";
+	              };
+	              twoli.appendChild(twot);
+	              twoul.appendChild(twoli);
+	           </c:forEach>
+	       };
+	       oneli.appendChild(t);
+	       oneul.appendChild(oneli);
+	    </c:forEach>
+	}
 	</script>
 </head>
 
 <body>   
 <div id="menu" class="menu">
-   <ul>
-      <li>用户管理</li>
+   <ul id="menu_one_ul">
+      <!-- <li>用户管理</li>
       <li>专业方向</li>
       <li>课程性质</li>
-      <li>题型管理</li>
+      <li>题型管理</li> -->
    </ul>
 </div>
 <br />
 <div id="menu_li1_content" class="content">
    <div id="menu_li1_content_menu" class="content_menu">
-      <ul>
-          <li>添加角色</li>
+      <ul id="menu_two_ul">
+          <!-- <li>添加角色</li>
           <li>角色权限设置</li>
           <li>教师用户导入</li>
           <li>学生用户导入</li>
           <li>添加/修改用户</li>
-          <li>修改密码</li>
+          <li>修改密码</li> -->
       </ul>
    </div>
    <div id="menu_li1_content_content"  class="content_content">
@@ -99,7 +123,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    </div>
 </div>
 
-<div id="menu_li2_content" class="content">
+<!-- <div id="menu_li2_content" class="content">
    <div id="menu_li2_content_menu" class="content_menu">
       <ul>
           <li>添加方向</li>
@@ -172,7 +196,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           
        </div>
    </div>
-</div>
+</div> -->
 
 </body>
 </html>

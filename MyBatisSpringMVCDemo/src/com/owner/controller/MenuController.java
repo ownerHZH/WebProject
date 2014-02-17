@@ -35,34 +35,7 @@ public class MenuController {
     	MenuLevelOne menuLevelOne=new MenuLevelOne();
     	menuLevelOne.setRole_code(6);
 		menuLevelOneList=menuLevelOneDAO.getMenuLevelOne(menuLevelOne);
-		/*if(menuLevelOneList!=null&&menuLevelOneList.size()>0)
-		{			
-			for(int i=0;i<menuLevelOneList.size();i++)
-			{
-				List<MenuLevelTwo> menuLevelTwoList=null;
-				MenuLevelTwo menuLevelTwo=new MenuLevelTwo();
-				menuLevelTwo.setMenu_level_one_id(menuLevelOneList.get(i).getMenu_level_one_id());		
-				menuLevelTwoList=menuLevelTwoDAO.getMenuLevelTwo(menuLevelTwo);
-				menuLevelOneList.get(i).setMenuLevelTwoList(menuLevelTwoList);
-				
-				if(menuLevelTwoList!=null&&menuLevelTwoList.size()>0)
-				{	
-					for(int i1=0;i1<menuLevelTwoList.size();i1++)
-					{
-						List<MenuLevelThree> threeList=new ArrayList<MenuLevelThree>();
-						MenuLevelThree menuLevelThree=new MenuLevelThree();
-						menuLevelThree.setMenu_level_two_id(menuLevelTwoList.get(i1).getMenu_level_two_id());
-						threeList=menuLevelThreeDAO.getMenuLevelThree(menuLevelThree);
-						menuLevelTwoList.get(i1).setMenuLevelThreeList(threeList);
-					}
-				}
-			}
-			
-		}*/
-		for(int i=0;i<menuLevelOneList.size();i++)
-		{
-			System.out.println("==++++++==="+menuLevelOneList.get(i).toString());
-		}
+		
 		return new ModelAndView("index1", "menuList", menuLevelOneList);
     }
     
@@ -71,8 +44,27 @@ public class MenuController {
 		return new ModelAndView("content");
 	}
     @RequestMapping("/ssystem_maintenance")
-	public ModelAndView ssystem_maintenance() {
-		return new ModelAndView("ssystem_maintenance");
+	public ModelAndView ssystem_maintenance() {			
+		List<MenuLevelTwo> menuLevelTwoList=null;
+		MenuLevelTwo menuLevelTwo=new MenuLevelTwo();
+		menuLevelTwo.setMenu_level_one_id(1);		
+		menuLevelTwoList=menuLevelTwoDAO.getMenuLevelTwo(menuLevelTwo);
+		
+		if(menuLevelTwoList!=null&&menuLevelTwoList.size()>0)
+		{	
+			for(int i1=0;i1<menuLevelTwoList.size();i1++)
+			{
+				List<MenuLevelThree> threeList=new ArrayList<MenuLevelThree>();
+				MenuLevelThree menuLevelThree=new MenuLevelThree();
+				menuLevelThree.setMenu_level_two_id(menuLevelTwoList.get(i1).getMenu_level_two_id());
+				threeList=menuLevelThreeDAO.getMenuLevelThree(menuLevelThree);
+				menuLevelTwoList.get(i1).setMenuLevelThreeList(threeList);
+			}
+		}
+		for (int i = 0; i < menuLevelTwoList.size(); i++) {
+			System.out.println("==================="+menuLevelTwoList.get(i).toString());
+		}
+		return new ModelAndView("ssystem_maintenance","menulist",menuLevelTwoList);
 	}
 	@RequestMapping("/professional_introduction")
 	public ModelAndView professional_introduction() {
