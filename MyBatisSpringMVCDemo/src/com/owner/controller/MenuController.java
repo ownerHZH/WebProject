@@ -65,5 +65,57 @@ public class MenuController {
 		}
 		return new ModelAndView("index1", "menuList", menuLevelOneList);
     }
-      
+    
+    @RequestMapping("/content")
+	public ModelAndView content() {
+		return new ModelAndView("content");
+	}
+    @RequestMapping("/ssystem_maintenance")
+	public ModelAndView ssystem_maintenance() {
+		return new ModelAndView("ssystem_maintenance");
+	}
+	@RequestMapping("/professional_introduction")
+	public ModelAndView professional_introduction() {
+		return new ModelAndView("professional_introduction");
+	}
+	@RequestMapping("/curriculum_system")
+	public ModelAndView curriculum_system() {
+		return new ModelAndView("curriculum_system");
+	}
+	@RequestMapping("/teachers_qualification")
+	public ModelAndView teachers_qualification() {
+		return new ModelAndView("teachers_qualification");
+	}
+	@RequestMapping("/outline")
+	public ModelAndView outline() {
+		return new ModelAndView("outline");
+	}
+	@RequestMapping("/courseware")
+	public ModelAndView courseware() {
+		return new ModelAndView("courseware");
+	}
+	@RequestMapping("/teaching_materials")
+	public ModelAndView teaching_materials() {
+		return new ModelAndView("teaching_materials");
+	}
+	@RequestMapping("/interactive_platform")
+	public ModelAndView interactive_platform() {
+		return new ModelAndView("interactive_platform");
+	}
+	@RequestMapping("/teaching_video")
+	public ModelAndView teaching_video() {
+		return new ModelAndView("teaching_video");
+	}
+	@RequestMapping("/homework")
+	public ModelAndView homework() {
+		return new ModelAndView("homework");
+	}
+	@RequestMapping("/online_testing")
+	public ModelAndView online_testing() {
+		return new ModelAndView("online_testing");
+	}
+	@RequestMapping("/practicing")
+	public ModelAndView practicing() {
+		return new ModelAndView("practicing");
+	}
 }
