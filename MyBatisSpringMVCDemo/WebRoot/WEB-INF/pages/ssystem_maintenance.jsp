@@ -23,61 +23,48 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   .content_menu{ float:left; width:20%; height:100%; cursor:pointer; background-color:#cc0;text-align:center;}
 	   .content_menu ul{ list-style:none;}
 	   .content_menu ul li{ margin:5px;}
-	   .content_content { display:none; float:left; width:80%; height:100%; text-align:center; padding-top:15%; background-color:#990;}
+	   .content_content { float:left; width:80%; height:100%; text-align:center; padding-top:15%; background-color:#990;}
+	   .item_content{display: none;}
 	</style>
 	
-	<script type="text/javascript">
-	   /*window.onload=function(){
-	    var menu=document.getElementById("menu");
-	   var lis=menu.getElementsByTagName("li");
-	   for( var i=0;i<lis.length;i++)
-	   {
-		    (function(x){
-	            lis[x].onclick=function(){
-					for(var j=0;j<lis.length;j++)
-					{
-						if(j!=x)
-						{
-							var d=document.getElementById("menu_li"+(j+1)+"_content");
-					        d.style.display="none";
-						}else
-						{
-							var div=document.getElementById("menu_li"+(j+1)+"_content");
-					        div.style.display="block";
-						}					
-					}				
-					};
-	        })(i);
-	   }
-	   document.getElementById("menu_li1_content").style.display="block"; 
-	   creatMenuLi();
-	};*/
-	$(function(){
-	    creatMenuLi();
-	});
+	<script type="text/javascript">	 
+	  
+	$(document).ready(function(){
+       creatMenuLi();
+    });
 	
 	function creatMenuLi()
 	{
-	    var oneul=document.getElementById("menu_one_ul");
-	    <c:forEach items="${menulist}" var="menu">      
-	       var oneli= document.createElement("li");
-	       var t=document.createTextNode("${menu.menu_level_two_name}");
-	       oneli.onclick=function(){
-	           var twoul=document.getElementById("menu_two_ul");
-	           $("#menu_two_ul").empty();
-	           <c:forEach items="${menu.menuLevelThreeList}" var="menu_two">
-	              var twoli= document.createElement("li");
-	              var twot=document.createTextNode("${menu_two.menu_level_three_name}");
-	              twoli.onclick=function(){
-	                 //document.getElementById("menu_li1_content_content").style.display="block";
-	              };
-	              twoli.appendChild(twot);
-	              twoul.appendChild(twoli);
+	    var oneul=$("#menu_one_ul");
+	    var firstUlLi=null,secondUlLi=null;
+	    <c:forEach items="${menulist}" var="menu" varStatus="status1">      
+	       var oneli= $("<li></li>");
+	       if("${status1.count}"=="1")
+	       {
+	          firstUlLi=oneli;
+	       }
+	       oneli.text("${menu.menu_level_two_name}");
+	       oneli.click(function(){
+	           var twoul=$("#menu_two_ul");
+	           twoul.empty();
+	           <c:forEach items="${menu.menuLevelThreeList}" var="menu_two" varStatus="status2">
+	              var twoli=$("<li></li>");
+	              if("${status2.count}"=="1")
+	              {
+	                 secondUlLi=twoli;
+	              }			      
+	              twoli.text("${menu_two.menu_level_three_name}");
+	              twoli.click(function(){
+	                 $(".item_content").css("display","none");
+	                 $("#content_${status1.count}_${status2.count}").css("display","block");
+	              });
+	              twoul.append(twoli);
 	           </c:forEach>
-	       };
-	       oneli.appendChild(t);
-	       oneul.appendChild(oneli);
+	           secondUlLi.click();
+	       });
+	       oneul.append(oneli);	       
 	    </c:forEach>
+	    firstUlLi.click();	   
 	}
 	</script>
 </head>
@@ -92,8 +79,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    </ul>
 </div>
 <br />
-<div id="menu_li1_content" class="content">
-   <div id="menu_li1_content_menu" class="content_menu">
+<div class="content">
+   <div class="content_menu">
       <ul id="menu_two_ul">
           <!-- <li>添加角色</li>
           <li>角色权限设置</li>
@@ -103,100 +90,81 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <li>修改密码</li> -->
       </ul>
    </div>
-   <div id="menu_li1_content_content"  class="content_content">
-       <div>添加角色</div>
-       <div>
-       
-          <div>
-             角色名：
-             <input type="text"  />
-          </div>
-          
-          <div>
-              备注：
-              <input type="text"  />
-          </div>
-          
-          <div><input type="button" value="提交" /></div>
-          
+   <div id="menu_content"  class="content_content">
+       <div id="content_1_1" class="item_content">
+	          <div>添加角色</div>
+	       <div>
+	       
+	          <div>
+	             角色名：
+	             <input type="text"  />
+	          </div>
+	          
+	          <div>
+	              备注：
+	              <input type="text"  />
+	          </div>
+	          
+	          <div><input type="button" value="提交" /></div>
+	          
+	       </div>
        </div>
+       
+       <div id="content_2_1" class="item_content">
+	           <div>添加方向</div>
+	       <div>
+	       
+	          <div>
+	             方向名：
+	             <input type="text"  />
+	          </div>
+	          
+	          <div><input type="button" value="提交" /></div>
+	          
+	       </div>
+       </div>
+       
+       <div id="content_3_1" class="item_content">
+				<div>添加性质</div>
+				<div>
+
+					<div>
+						课程性质名： <input type="text" />
+					</div>
+
+					<div>
+						<input type="button" value="提交" />
+					</div>
+
+				</div>
+		</div>
+		
+		<div id="content_4_1" class="item_content">
+				<div>添加题型</div>
+				<div>
+
+					<div>
+						题型名： <input type="text" />
+					</div>
+
+					<div>
+						标题描述： <input type="text" />
+					</div>
+
+					<div>
+						是否为客观题:<input type="radio" value="是" />是<input type="radio"
+							value="否" />否
+					</div>
+
+					<div>
+						<input type="button" value="提交" />
+					</div>
+
+				</div>
+		</div>
+       
    </div>
 </div>
-
-<!-- <div id="menu_li2_content" class="content">
-   <div id="menu_li2_content_menu" class="content_menu">
-      <ul>
-          <li>添加方向</li>
-          <li>浏览/修改方向</li>
-      </ul>
-   </div>
-   <div id="menu_li2_content_content" class="content_content">
-       <div>添加方向</div>
-       <div>
-       
-          <div>
-             方向名：
-             <input type="text"  />
-          </div>
-          
-          <div><input type="button" value="提交" /></div>
-          
-       </div>
-   </div>
-</div>
-
-<div id="menu_li3_content" class="content">
-   <div id="menu_li3_content_menu" class="content_menu">
-      <ul>
-          <li>添加性质</li>
-          <li>浏览/修改性质</li>
-      </ul>
-   </div>
-   <div id="menu_li3_content_content" class="content_content">
-       <div>添加性质</div>
-       <div>
-       
-          <div>
-             课程性质名：
-             <input type="text"  />
-          </div>
-          
-          <div><input type="button" value="提交" /></div>
-          
-       </div>
-   </div>
-</div>
-
-<div id="menu_li4_content" class="content">
-   <div id="menu_li4_content_menu" class="content_menu">
-      <ul>
-          <li>添加题型</li>
-          <li>浏览/修改题型</li>
-      </ul>
-   </div>
-   <div id="menu_li4_content_content" class="content_content">
-       <div>添加题型</div>
-       <div>
-       
-          <div>
-             题型名：
-             <input type="text"  />
-          </div>
-          
-          <div>
-              标题描述：
-              <input type="text"  />
-          </div>
-          
-          <div>
-          是否为客观题:<input type="radio" value="是" />是<input type="radio" value="否" />否
-          </div>
-          
-          <div><input type="button" value="提交" /></div>
-          
-       </div>
-   </div>
-</div> -->
 
 </body>
 </html>
