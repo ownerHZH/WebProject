@@ -43,7 +43,7 @@ public class MenuController {
 	public ModelAndView content() {
 		return new ModelAndView("content");
 	}
-    @RequestMapping("/ssystem_maintenance")
+    @RequestMapping("/ssystem-maintenance")
 	public ModelAndView ssystem_maintenance() {			
 		List<MenuLevelTwo> menuLevelTwoList=null;
 		MenuLevelTwo menuLevelTwo=new MenuLevelTwo();
@@ -61,22 +61,20 @@ public class MenuController {
 				menuLevelTwoList.get(i1).setMenuLevelThreeList(threeList);
 			}
 		}
-		for (int i = 0; i < menuLevelTwoList.size(); i++) {
-			System.out.println("==================="+menuLevelTwoList.get(i).toString());
-		}
-		return new ModelAndView("ssystem_maintenance","menulist",menuLevelTwoList);
+
+		return new ModelAndView("ssystem-maintenance","menulist",menuLevelTwoList);
 	}
-	@RequestMapping("/professional_introduction")
+	@RequestMapping("/professional-introduction")
 	public ModelAndView professional_introduction() {
-		return new ModelAndView("professional_introduction");
+		return new ModelAndView("professional-introduction");
 	}
-	@RequestMapping("/curriculum_system")
+	@RequestMapping("/curriculum-system")
 	public ModelAndView curriculum_system() {
-		return new ModelAndView("curriculum_system");
+		return new ModelAndView("curriculum-system");
 	}
-	@RequestMapping("/teachers_qualification")
+	@RequestMapping("/teachers-qualification")
 	public ModelAndView teachers_qualification() {
-		return new ModelAndView("teachers_qualification");
+		return new ModelAndView("teachers-qualification");
 	}
 	@RequestMapping("/outline")
 	public ModelAndView outline() {
@@ -86,28 +84,78 @@ public class MenuController {
 	public ModelAndView courseware() {
 		return new ModelAndView("courseware");
 	}
-	@RequestMapping("/teaching_materials")
+	@RequestMapping("/teaching-materials")
 	public ModelAndView teaching_materials() {
-		return new ModelAndView("teaching_materials");
+		return new ModelAndView("teaching-materials");
 	}
-	@RequestMapping("/interactive_platform")
+	@RequestMapping("/interactive-platform")
 	public ModelAndView interactive_platform() {
-		return new ModelAndView("interactive_platform");
+		return new ModelAndView("interactive-platform");
 	}
-	@RequestMapping("/teaching_video")
+	@RequestMapping("/teaching-video")
 	public ModelAndView teaching_video() {
-		return new ModelAndView("teaching_video");
+		return new ModelAndView("teaching-video");
 	}
 	@RequestMapping("/homework")
 	public ModelAndView homework() {
 		return new ModelAndView("homework");
 	}
-	@RequestMapping("/online_testing")
+	@RequestMapping("/online-testing")
 	public ModelAndView online_testing() {
-		return new ModelAndView("online_testing");
+		return new ModelAndView("online-testing");
 	}
 	@RequestMapping("/practicing")
 	public ModelAndView practicing() {
 		return new ModelAndView("practicing");
+	}
+	
+	//三级菜单所对应的页面
+	@RequestMapping("/menu-content-add-role")
+	public ModelAndView menu_content_add_role() {
+		return new ModelAndView("menu-content-add-role");
+	}
+	@RequestMapping("/menu-content-role-setting")
+	public ModelAndView menu_content_role_setting() {
+		return new ModelAndView("menu-content-role-setting");
+	}
+	@RequestMapping("/menu-content-import-teachers")
+	public ModelAndView menu_content_import_teachers() {
+		return new ModelAndView("menu-content-import-teachers");
+	}
+	@RequestMapping("/menu-content-import-students")
+	public ModelAndView menu_content_import_students() {
+		return new ModelAndView("menu-content-import-students");
+	}
+	@RequestMapping("/menu-content-add-user")
+	public ModelAndView menu_content_add_user() {
+		return new ModelAndView("menu-content-add-user");
+	}
+	@RequestMapping("/menu-content-change-password")
+	public ModelAndView menu_content_change_password() {
+		return new ModelAndView("menu-content-change-password");
+	}
+	@RequestMapping("/menu-content-add-direction")
+	public ModelAndView menu_content_add_direction() {
+		return new ModelAndView("menu-content-add-direction");
+	}
+	@RequestMapping("/menu-content-change-direction")
+	public ModelAndView menu_content_change_direction() {
+		return new ModelAndView("menu-content-change-direction");
+	}
+	@RequestMapping("/menu-content-add-property")
+	public ModelAndView menu_content_add_property() {
+		return new ModelAndView("menu-content-add-property");
+	}
+	@RequestMapping("/menu-content-change-property")
+	public ModelAndView menu_content_change_property() {
+		return new ModelAndView("menu-content-change-property");
+	}
+	@RequestMapping("/menu-content-add-category")
+	public ModelAndView menu_content_add_category() {
+		return new ModelAndView("menu-content-add-category");
+	}
+	@RequestMapping("/menu-content-change-category")
+	public ModelAndView menu_content_change_category() {
+		return new ModelAndView("menu-content-change-category");
 	}
 }

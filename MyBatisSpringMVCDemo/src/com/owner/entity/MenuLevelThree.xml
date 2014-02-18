@@ -6,24 +6,27 @@
 		<id property="menu_level_three_id" column="menu_level_three_id"></id>
 		<id property="menu_level_two_id" column="menu_level_two_id"></id>
 		<id property="menu_level_three_name" column="menu_level_three_name"></id>
+		<id property="mapping_page" column="mapping_page"></id>
 	</resultMap>
 	<select id="getMenuLevelThree" parameterType="MenuLevelThree" resultMap="menuLevelThreeMap">
 		select 
 		   menu_level_two_id,
 		   menu_level_three_id,
-		   menu_level_three_name 
+		   menu_level_three_name,
+		   mapping_page
 		 from menulevelthree 
 		 where 
 		   menu_level_two_id=#{menu_level_two_id}
 	</select>
 	<insert id="addMenuLevelThree" parameterType="MenuLevelThree">
-		insert into menulevelthree(menu_level_two_id,menu_level_three_name) 
-		   values(#{menu_level_two_id},#{menu_level_three_name})
+		insert into menulevelthree(menu_level_two_id,menu_level_three_name,mapping_page) 
+		   values(#{menu_level_two_id},#{menu_level_three_name},#{mapping_page})
 	</insert>
 	<update id="updateMenuLevelThree" parameterType="MenuLevelThree">
 		update menulevelthree set 
 		   menu_level_two_id=#{menu_level_two_id},
-		   menu_level_three_name=#{menu_level_three_name} 
+		   menu_level_three_name=#{menu_level_three_name},
+		   mapping_page=#{mapping_page} 
 		 where 
 		   menu_level_three_id=#{menu_level_three_id}
 	</update>

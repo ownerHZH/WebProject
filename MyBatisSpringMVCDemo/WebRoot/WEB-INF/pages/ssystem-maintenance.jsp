@@ -23,8 +23,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   .content_menu{ float:left; width:20%; height:100%; cursor:pointer; background-color:#cc0;text-align:center;}
 	   .content_menu ul{ list-style:none;}
 	   .content_menu ul li{ margin:5px;}
-	   .content_content { float:left; width:80%; height:100%; text-align:center; padding-top:15%; background-color:#990;}
-	   .item_content{display: none;}
+	   .iframe_div { float:left; width:80%; height:100%; text-align:center; background-color:#66F;}
+	   .iframe_content{ width: 100%; height: 100%;}
 	</style>
 	
 	<script type="text/javascript">	 
@@ -55,8 +55,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	              }			      
 	              twoli.text("${menu_two.menu_level_three_name}");
 	              twoli.click(function(){
-	                 $(".item_content").css("display","none");
-	                 $("#content_${status1.count}_${status2.count}").css("display","block");
+	                  $("#iframe").attr("src","${menu_two.mapping_page}");
 	              });
 	              twoul.append(twoli);
 	           </c:forEach>
@@ -90,80 +89,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <li>修改密码</li> -->
       </ul>
    </div>
-   <div id="menu_content"  class="content_content">
-       <div id="content_1_1" class="item_content">
-	          <div>添加角色</div>
-	       <div>
-	       
-	          <div>
-	             角色名：
-	             <input type="text"  />
-	          </div>
-	          
-	          <div>
-	              备注：
-	              <input type="text"  />
-	          </div>
-	          
-	          <div><input type="button" value="提交" /></div>
-	          
-	       </div>
-       </div>
-       
-       <div id="content_2_1" class="item_content">
-	           <div>添加方向</div>
-	       <div>
-	       
-	          <div>
-	             方向名：
-	             <input type="text"  />
-	          </div>
-	          
-	          <div><input type="button" value="提交" /></div>
-	          
-	       </div>
-       </div>
-       
-       <div id="content_3_1" class="item_content">
-				<div>添加性质</div>
-				<div>
-
-					<div>
-						课程性质名： <input type="text" />
-					</div>
-
-					<div>
-						<input type="button" value="提交" />
-					</div>
-
-				</div>
-		</div>
-		
-		<div id="content_4_1" class="item_content">
-				<div>添加题型</div>
-				<div>
-
-					<div>
-						题型名： <input type="text" />
-					</div>
-
-					<div>
-						标题描述： <input type="text" />
-					</div>
-
-					<div>
-						是否为客观题:<input type="radio" value="是" />是<input type="radio"
-							value="否" />否
-					</div>
-
-					<div>
-						<input type="button" value="提交" />
-					</div>
-
-				</div>
-		</div>
-       
+   
+   <div class="iframe_div">
+      <iframe id="iframe" class="iframe_content"></iframe>
    </div>
+  
 </div>
 
 </body>

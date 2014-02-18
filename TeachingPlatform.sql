@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50527
 File Encoding         : 65001
 
-Date: 2014-02-17 00:00:39
+Date: 2014-02-18 14:29:48
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -133,18 +133,18 @@ CREATE TABLE `menulevelone` (
 -- ----------------------------
 -- Records of menulevelone
 -- ----------------------------
-INSERT INTO `menulevelone` VALUES ('1', '6', '系统维护', 'system_maintenance');
-INSERT INTO `menulevelone` VALUES ('2', '6', '专业介绍', 'professional_introduction');
-INSERT INTO `menulevelone` VALUES ('3', '6', '课程体系', 'curriculum_system');
-INSERT INTO `menulevelone` VALUES ('4', '6', '师资情况', 'teachers_qualification');
-INSERT INTO `menulevelone` VALUES ('5', '6', '大纲', 'outline');
-INSERT INTO `menulevelone` VALUES ('6', '6', '课件', 'courseware');
-INSERT INTO `menulevelone` VALUES ('7', '6', '教辅资料', 'teaching_materials');
-INSERT INTO `menulevelone` VALUES ('8', '6', '教学录相', 'teaching_video');
-INSERT INTO `menulevelone` VALUES ('9', '6', '作业', 'homework');
-INSERT INTO `menulevelone` VALUES ('10', '6', '在线测试', 'online_testing');
-INSERT INTO `menulevelone` VALUES ('11', '6', '实战演练', 'practicing');
-INSERT INTO `menulevelone` VALUES ('12', '6', '互动平台', 'interactive_platform');
+INSERT INTO `menulevelone` VALUES ('1', '6', '系统维护', 'ssystem-maintenance.html');
+INSERT INTO `menulevelone` VALUES ('2', '6', '专业介绍', 'professional-introduction.html');
+INSERT INTO `menulevelone` VALUES ('3', '6', '课程体系', 'curriculum-system.html');
+INSERT INTO `menulevelone` VALUES ('4', '6', '师资情况', 'teachers-qualification.html');
+INSERT INTO `menulevelone` VALUES ('5', '6', '大纲', 'outline.html');
+INSERT INTO `menulevelone` VALUES ('6', '6', '课件', 'courseware.html');
+INSERT INTO `menulevelone` VALUES ('7', '6', '教辅资料', 'teaching-materials.html');
+INSERT INTO `menulevelone` VALUES ('8', '6', '教学录相', 'teaching-video.html');
+INSERT INTO `menulevelone` VALUES ('9', '6', '作业', 'homework.html');
+INSERT INTO `menulevelone` VALUES ('10', '6', '在线测试', 'online-testing.html');
+INSERT INTO `menulevelone` VALUES ('11', '6', '实战演练', 'practicing.html');
+INSERT INTO `menulevelone` VALUES ('12', '6', '互动平台', 'interactive-platform.html');
 
 -- ----------------------------
 -- Table structure for `menulevelthree`
@@ -154,6 +154,7 @@ CREATE TABLE `menulevelthree` (
   `menu_level_three_id` int(11) NOT NULL AUTO_INCREMENT,
   `menu_level_two_id` int(11) DEFAULT NULL,
   `menu_level_three_name` varchar(20) DEFAULT NULL,
+  `mapping_page` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`menu_level_three_id`),
   KEY `FK_Re_MenuLevelTwo_MenuLevelThree` (`menu_level_two_id`),
   CONSTRAINT `FK_Re_MenuLevelTwo_MenuLevelThree` FOREIGN KEY (`menu_level_two_id`) REFERENCES `menuleveltwo` (`menu_level_two_id`)
@@ -162,18 +163,18 @@ CREATE TABLE `menulevelthree` (
 -- ----------------------------
 -- Records of menulevelthree
 -- ----------------------------
-INSERT INTO `menulevelthree` VALUES ('1', '1', '添加角色');
-INSERT INTO `menulevelthree` VALUES ('2', '1', '角色权限设置');
-INSERT INTO `menulevelthree` VALUES ('3', '1', '教师用户导入');
-INSERT INTO `menulevelthree` VALUES ('4', '1', '学生用户导入');
-INSERT INTO `menulevelthree` VALUES ('5', '1', '添加/修改用户');
-INSERT INTO `menulevelthree` VALUES ('6', '1', '修改密码');
-INSERT INTO `menulevelthree` VALUES ('7', '2', '添加方向');
-INSERT INTO `menulevelthree` VALUES ('8', '2', '浏览/修改方向');
-INSERT INTO `menulevelthree` VALUES ('9', '3', '添加性质');
-INSERT INTO `menulevelthree` VALUES ('10', '3', '浏览/修改性质');
-INSERT INTO `menulevelthree` VALUES ('11', '4', '添加题型');
-INSERT INTO `menulevelthree` VALUES ('12', '4', '浏览/修改题型');
+INSERT INTO `menulevelthree` VALUES ('1', '1', '添加角色', 'menu-content-add-role.html');
+INSERT INTO `menulevelthree` VALUES ('2', '1', '角色权限设置', 'menu-content-role-setting.html');
+INSERT INTO `menulevelthree` VALUES ('3', '1', '教师用户导入', 'menu-content-import-teachers.html');
+INSERT INTO `menulevelthree` VALUES ('4', '1', '学生用户导入', 'menu-content-import-students.html');
+INSERT INTO `menulevelthree` VALUES ('5', '1', '添加/修改用户', 'menu-content-add-user.html');
+INSERT INTO `menulevelthree` VALUES ('6', '1', '修改密码', 'menu-content-change-password.html');
+INSERT INTO `menulevelthree` VALUES ('7', '2', '添加方向', 'menu-content-add-direction.html');
+INSERT INTO `menulevelthree` VALUES ('8', '2', '浏览/修改方向', 'menu-content-change-direction.html');
+INSERT INTO `menulevelthree` VALUES ('9', '3', '添加性质', 'menu-content-add-property.html');
+INSERT INTO `menulevelthree` VALUES ('10', '3', '浏览/修改性质', 'menu-content-change-property.html');
+INSERT INTO `menulevelthree` VALUES ('11', '4', '添加题型', 'menu-content-add-category.html');
+INSERT INTO `menulevelthree` VALUES ('12', '4', '浏览/修改题型', 'menu-content-change-category.html');
 
 -- ----------------------------
 -- Table structure for `menuleveltwo`

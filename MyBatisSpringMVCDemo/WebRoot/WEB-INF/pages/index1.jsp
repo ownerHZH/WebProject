@@ -26,7 +26,7 @@ function creatMenuLi()
        var t=document.createTextNode("${menu.menu_level_one_name}");
        li.id="${menu.mapping_page}";
        li.onclick=function(){
-           iframe.src="${menu.mapping_page}"+".html";
+           iframe.src="${menu.mapping_page}";
        };
        li.appendChild(t);
        ul.appendChild(li);
