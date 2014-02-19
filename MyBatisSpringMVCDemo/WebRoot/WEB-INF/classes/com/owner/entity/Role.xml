@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.owner.entity.Role">
+	<resultMap type="Role" id="roleMap">
+		<id property="role_code" column="role_code"></id>
+		<id property="role_name" column="role_name"></id>
+		<id property="role_comment" column="role_comment"></id>
+	</resultMap>
+	<select id="getRoleById" parameterType="Role" resultMap="roleMap">
+		select 
+		   role_code,
+		   role_name,
+		   role_comment 
+		 from role 
+		   where role_code=#{role_code}
+	</select>
+	
+	<select id="getAllRole" parameterType="Role" resultMap="roleMap">
+		select 
+		   role_code,
+		   role_name,
+		   role_comment 
+		 from role 
+	</select>
+	
+	<insert id="addRole" parameterType="Role">
+		insert into role(role_code,role_name,role_comment) 
+		   values(#{role_code},#{role_name},#{role_comment})
+	</insert>
+	
+	<update id="updateRole" parameterType="Role">
+		update role set 
+		   role_name=#{role_name},
+		   role_comment=#{role_comment}
+		 where 
+		   role_code=#{role_code}
+	</update>
+	
+</mapper>

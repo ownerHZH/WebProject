@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.owner.entity.Major">
+	<resultMap type="Major" id="majorMap">
+		<id property="major_code" column="major_code"></id>
+		<id property="major_name" column="major_name"></id>
+		<id property="major_introduction" column="major_introduction"></id>
+	</resultMap>
+	<select id="getMajorById" parameterType="Major" resultMap="majorMap">
+		select 
+		   major_code,
+		   major_name,
+		   major_introduction 
+		 from Major 
+		   where major_code=#{major_code}
+	</select>
+	
+	<select id="getAllMajor" parameterType="Major" resultMap="majorMap">
+		select 
+		   major_code,
+		   major_name,
+		   major_introduction 
+		 from major 
+	</select>
+	
+	<insert id="addMajor" parameterType="Major">
+		insert into major(major_code,major_name,major_introduction) 
+		   values(#{major_code},#{major_name},#{major_introduction})
+	</insert>
+	
+	<insert id="addMajorBatch" parameterType="Major">  
+        insert into major(major_code,major_name,major_introduction)  
+        values
+          <foreach collection="majors" item="item" index="index" separator=",">
+               (#{item.major_code,jdbcType=INTEGER},
+               #{item.major_name,jdbcType=VARCHAR},
+               #{item.major_introduction,jdbcType=VARCHAR})
+          </foreach> 
+    </insert>
+	
+	<update id="updateMajor" parameterType="Major">
+		update major set 
+		   major_name=#{major_name},
+		   major_introduction=#{major_introduction}
+		 where 
+		   major_code=#{major_code}
+	</update>
+	
+</mapper>

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50527
 File Encoding         : 65001
 
-Date: 2014-02-18 14:29:48
+Date: 2014-02-19 18:00:00
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -109,12 +109,35 @@ DROP TABLE IF EXISTS `major`;
 CREATE TABLE `major` (
   `major_code` int(11) NOT NULL,
   `major_name` varchar(20) DEFAULT NULL,
+  `major_introduction` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`major_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of major
 -- ----------------------------
+INSERT INTO `major` VALUES ('1', '计算机科学与技术', 'computer.html');
+INSERT INTO `major` VALUES ('2', '计算机科学与技术', 'computer.html');
+INSERT INTO `major` VALUES ('3', '计算机科学与技术', 'computer.html');
+INSERT INTO `major` VALUES ('4', '计算机科学与技术', 'computer.html');
+INSERT INTO `major` VALUES ('5', '计算机科学与技术', 'computer.html');
+INSERT INTO `major` VALUES ('6', '计算机科学与技术', 'computer.html');
+INSERT INTO `major` VALUES ('7', '计算机科学与技术', 'computer.html');
+INSERT INTO `major` VALUES ('8', '计算机科学与技术', 'computer.html');
+INSERT INTO `major` VALUES ('9', '计算机科学与技术', 'computer.html');
+INSERT INTO `major` VALUES ('10', '计算机科学与技术', 'computer.html');
+INSERT INTO `major` VALUES ('11', '计算机科学与技术', 'computer.html');
+INSERT INTO `major` VALUES ('12', '计算机科学与技术', 'computer.html');
+INSERT INTO `major` VALUES ('13', '计算机科学与技术', 'computer.html');
+INSERT INTO `major` VALUES ('14', '计算机科学与技术', 'computer.html');
+INSERT INTO `major` VALUES ('15', '计算机科学与技术', 'computer.html');
+INSERT INTO `major` VALUES ('16', '计算机科学与技术', 'computer.html');
+INSERT INTO `major` VALUES ('17', '计算机科学与技术', 'computer.html');
+INSERT INTO `major` VALUES ('18', '计算机科学与技术', 'computer.html');
+INSERT INTO `major` VALUES ('19', '计算机科学与技术', 'computer.html');
+INSERT INTO `major` VALUES ('20', '计算机科学与技术', 'computer.html');
+INSERT INTO `major` VALUES ('21', '计算机科学与技术', 'computer.html');
+INSERT INTO `major` VALUES ('22', '计算机科学与技术', 'computer.html');
 
 -- ----------------------------
 -- Table structure for `menulevelone`
@@ -274,11 +297,11 @@ CREATE TABLE `re_teacher_course` (
 -- ----------------------------
 DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role` (
-  `role_code` int(11) NOT NULL,
+  `role_code` int(11) NOT NULL AUTO_INCREMENT,
   `role_name` varchar(16) DEFAULT NULL,
   `role_comment` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`role_code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of role
@@ -320,9 +343,10 @@ CREATE TABLE `student` (
 -- ----------------------------
 DROP TABLE IF EXISTS `supplementary`;
 CREATE TABLE `supplementary` (
-  `course_code` varchar(10) DEFAULT NULL,
+  `course_code` varchar(10) NOT NULL DEFAULT '',
   `supplementary_name` varchar(20) DEFAULT NULL,
   `supplementary_path` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`course_code`),
   KEY `FK_Re_Course_Supplementary` (`course_code`),
   CONSTRAINT `FK_Re_Course_Supplementary` FOREIGN KEY (`course_code`) REFERENCES `course` (`course_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

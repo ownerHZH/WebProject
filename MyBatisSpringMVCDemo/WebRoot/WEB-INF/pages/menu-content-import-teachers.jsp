@@ -23,6 +23,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    <p style=" font-size:36px"> this is your wanted page</p><br />
+    <div>
+	    <form action="importData.html" method="post" enctype="multipart/form-data">
+	            选择文件：<input type="file" id="file" name="file" />
+	       <input type="submit" value="提交">
+	    </form>
+    </div>
   </body>
 </html>

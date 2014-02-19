@@ -7,11 +7,17 @@
 		<typeAlias type="com.owner.entity.MenuLevelOne" alias="MenuLevelOne"/>
 		<typeAlias type="com.owner.entity.MenuLevelTwo" alias="MenuLevelTwo"/>
 		<typeAlias type="com.owner.entity.MenuLevelThree" alias="MenuLevelThree"/>
+		
+		<typeAlias type="com.owner.entity.Role" alias="Role"/>
+		<typeAlias type="com.owner.entity.Major" alias="Major"/>
 	</typeAliases>
 	 <mappers>  
       <mapper resource="com/owner/entity/UserTable.xml" />  
       <mapper resource="com/owner/entity/MenuLevelOne.xml" />
       <mapper resource="com/owner/entity/MenuLevelTwo.xml" />
       <mapper resource="com/owner/entity/MenuLevelThree.xml" />
+      
+      <mapper resource="com/owner/entity/Role.xml" />
+      <mapper resource="com/owner/entity/Major.xml" />
      </mappers>  
 </configuration>
