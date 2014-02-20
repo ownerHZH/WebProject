@@ -21,7 +21,7 @@ import com.owner.dao.IMajorDAO;
 import com.owner.dao.IRoleDAO;
 import com.owner.entity.Major;
 import com.owner.entity.Role;
-import com.owner.util.ExcelToDB;
+import com.owner.util.ExcelToDb;
 
 @Controller  
 public class UserManageController { 
@@ -50,9 +50,12 @@ public class UserManageController {
             e.printStackTrace();  
         }
         
-		ExcelToDB e=new ExcelToDB(targetFile);
-		List<Major> majors=e.excelReading();
-		majorDAO.addMajor(majors);
+		ExcelToDb e=new ExcelToDb(targetFile,"major");
+		List<Major> majors=(List<Major>) e.getList();
+		if(majors!=null)
+		{
+			majorDAO.addMajor(majors);
+		}		
 		return new ModelAndView("menu-content-import-teachers");    
 	}
 	

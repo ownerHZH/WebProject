@@ -1,6 +1,6 @@
 package com.owner.entity;
 
-public class Major {
+public class Major{
 	private int major_code;
 	private String major_name;
 	private String major_introduction;
@@ -8,8 +8,14 @@ public class Major {
 	public int getMajor_code() {
 		return major_code;
 	}
-	public void setMajor_code(int major_code) {
-		this.major_code = major_code;
+	public void setMajor_code(String major_code) {
+		if(major_code.contains("."))
+		{
+			this.major_code=(int) Double.parseDouble(major_code);
+		}else
+		{
+			this.major_code = Integer.parseInt(major_code);
+		}		
 	}
 	public String getMajor_name() {
 		return major_name;
