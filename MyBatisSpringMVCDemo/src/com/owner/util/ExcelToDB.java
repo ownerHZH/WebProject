@@ -44,8 +44,7 @@ public class ExcelToDb {
 		} catch (NullPointerException e1) {
 			e1.printStackTrace();
 		}
-		
-		
+				
 		/*MajorDAOImpl majorDAO=new MajorDAOImpl();
 		majorDAO.addMajor(majors);*/
 	}

@@ -31,7 +31,7 @@ public class UserManageController {
 	private IMajorDAO majorDAO;
 	
 	//数据导入
-	@RequestMapping(value = "/importData", method = RequestMethod.POST)      
+	@RequestMapping(value = "/importTeacher", method = RequestMethod.POST)      
 	public ModelAndView importData(@RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request) 
 	{     
 		String path = request.getSession().getServletContext().getRealPath("upload");  
