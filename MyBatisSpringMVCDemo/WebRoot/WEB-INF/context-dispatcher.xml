@@ -42,5 +42,5 @@
 
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
-		p:defaultEncoding="UTF-8" />
+		p:defaultEncoding="UTF-8" p:maxInMemorySize="4096" />
 </beans>  

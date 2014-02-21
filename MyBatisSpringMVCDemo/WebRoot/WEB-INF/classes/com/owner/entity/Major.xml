@@ -30,11 +30,10 @@
 	</insert>
 	
 	<insert id="addMajorBatch" parameterType="Major">  
-        insert into major(major_code,major_name,major_introduction)  
+        insert into major(major_name,major_introduction)  
         values
           <foreach collection="majors" item="item" index="index" separator=",">
-               (#{item.major_code,jdbcType=INTEGER},
-               #{item.major_name,jdbcType=VARCHAR},
+               (#{item.major_name,jdbcType=VARCHAR},
                #{item.major_introduction,jdbcType=VARCHAR})
           </foreach> 
     </insert>

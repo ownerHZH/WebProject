@@ -64,10 +64,7 @@ public class MenuController {
 
 		return new ModelAndView("ssystem-maintenance","menulist",menuLevelTwoList);
 	}
-	@RequestMapping("/professional-introduction")
-	public ModelAndView professional_introduction() {
-		return new ModelAndView("professional-introduction");
-	}
+	
 	@RequestMapping("/curriculum-system")
 	public ModelAndView curriculum_system() {
 		return new ModelAndView("curriculum-system");

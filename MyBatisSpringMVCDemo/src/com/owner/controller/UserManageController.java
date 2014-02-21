@@ -3,6 +3,8 @@ package com.owner.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -19,45 +21,57 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.owner.dao.IMajorDAO;
 import com.owner.dao.IRoleDAO;
+import com.owner.dao.ITeacherDAO;
 import com.owner.entity.Major;
 import com.owner.entity.Role;
+import com.owner.entity.Teacher;
 import com.owner.util.ExcelToDb;
+import com.owner.util.FileOperation;
+import com.owner.util.RandomNumber;
 
 @Controller  
 public class UserManageController { 
 	@Resource(name = "roleDAO")
 	private IRoleDAO roleDAO;
-	@Resource(name = "majorDAO")
-	private IMajorDAO majorDAO;
+	@Resource(name = "teacherDAO")
+	private ITeacherDAO teacherDAO;
 	
+	private final String uploadLocation = "upload\\";
 	//数据导入
 	@RequestMapping(value = "/importTeacher", method = RequestMethod.POST)      
-	public ModelAndView importData(@RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request) 
+	public ModelAndView importData(@RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request,HttpServletResponse response) 
 	{     
-		String path = request.getSession().getServletContext().getRealPath("upload");  
-        String fileName = file.getOriginalFilename();  
-//        String fileName = new Date().getTime()+".jpg";  
-        System.out.println("路径==="+path);  
-        File targetFile = new File(path, fileName);  
-        if(!targetFile.exists()){  
-            targetFile.mkdirs();  
-        }  
-  
-        //保存  
-        try {  
-            file.transferTo(targetFile);  
-        } catch (Exception e) {  
-            e.printStackTrace();  
-        }
+		String path = request.getSession().getServletContext().getRealPath("/")+uploadLocation;
+		//以日期创建文件夹
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");  
+        String ymd = sdf.format(new Date());
         
-		ExcelToDb e=new ExcelToDb(targetFile,"major");
-		List<Major> majors=(List<Major>) e.getList();
-		if(majors!=null)
+        //保存文件
+        File targetFile = FileOperation.saveFile(file, path+ymd+"/");
+        
+        //保存数据
+		ExcelToDb e=new ExcelToDb(targetFile,"teacher");
+
+		List<Teacher> teachers=(List<Teacher>) e.teacherExcelReading();
+		for(int i=0;i<teachers.size();i++)
 		{
-			majorDAO.addMajor(majors);
+			System.out.println("===="+teachers.get(i).toString());
+		}
+		if(teachers!=null)
+		{
+			teacherDAO.addTeacher(teachers);
 		}		
-		return new ModelAndView("menu-content-import-teachers");    
-	}
+		
+		//向前台打印数据
+		PrintWriter out = null;
+		try {
+			out = response.getWriter();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		out.print("success");
+		return null;//new ModelAndView("menu-content-import-teachers");    
+	}	
 	
 	//添加角色
 	@RequestMapping(value = "/addRole", method = RequestMethod.POST)      
@@ -71,5 +85,7 @@ public class UserManageController {
 		}
 		out.print(flag);
 		return null;    
-		} 
+		}
+	
+	
 }

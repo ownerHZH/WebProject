@@ -65,5 +65,8 @@
 	<bean id="majorDAO" class="com.owner.dao.impl.MajorDAOImpl">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
 	</bean>
+	<bean id="teacherDAO" class="com.owner.dao.impl.TeacherDAOImpl">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
 
 </beans>
