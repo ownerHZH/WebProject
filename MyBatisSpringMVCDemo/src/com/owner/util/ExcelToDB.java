@@ -146,8 +146,11 @@ public class ExcelToDb {
 			{
 				Major major=new Major();			
 				for(int t=0;t<titleCell.length;t++)
-				{									
-					setValue(rowCell[t],titleCell[t],major);					
+				{			
+					if(rowCell[t]!=null&&!rowCell[t].getContents().trim().equals("")&&rowCell[t].getContents().trim()!="")
+					{
+						setValue(rowCell[t],titleCell[t],major);
+					}										
 				}
 				majors.add(major);
 			}
