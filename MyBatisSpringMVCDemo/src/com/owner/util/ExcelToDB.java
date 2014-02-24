@@ -167,7 +167,7 @@ public class ExcelToDb {
 		for(int i=1;i<rows;i++)
 		{
 			Cell[] rowCell=sheet.getRow(i);
-			if(rowCell==null)
+			if(judgeCell(rowCell))
 			{
 				continue;
 			}else
@@ -175,10 +175,7 @@ public class ExcelToDb {
 				Major major=new Major();			
 				for(int t=0;t<titleCell.length;t++)
 				{			
-					if(rowCell[t]!=null&&!rowCell[t].getContents().trim().equals("")&&rowCell[t].getContents().trim()!="")
-					{
-						setValue(rowCell[t],titleCell[t],major);
-					}										
+					setValue(rowCell[t],titleCell[t],major);								
 				}
 				majors.add(major);
 			}

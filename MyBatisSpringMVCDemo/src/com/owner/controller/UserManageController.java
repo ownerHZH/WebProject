@@ -52,11 +52,8 @@ public class UserManageController {
         //保存数据
 		ExcelToDb e=new ExcelToDb(targetFile,"teacher");
 
-		List<Teacher> teachers=(List<Teacher>) e.teacherExcelReading();
-		for(int i=0;i<teachers.size();i++)
-		{
-			System.out.println("===="+teachers.get(i).toString());
-		}
+		@SuppressWarnings("unchecked")
+		List<Teacher> teachers=(List<Teacher>) e.getList();
 		if(teachers!=null)
 		{
 			teacherDAO.addTeacher(teachers);
