@@ -85,6 +85,13 @@ public class TeacherDAOImpl implements ITeacherDAO {
 		SqlSession sqlSession=null;
 		try {
 			sqlSession = this.getSqlSessionFactory().openSession(ExecutorType.BATCH, false);
+			for(int i=0;i<teachers.size();i++)
+			{
+				if(teachers.get(i).equals(null))
+				{
+					teachers.remove(i);
+				}
+			}
 			Map<String, List<Teacher>> tmp = new HashMap<String, List<Teacher>>();
 			tmp.put("teachers", teachers);
 			sqlSession.insert("addTeacherBatch", tmp);

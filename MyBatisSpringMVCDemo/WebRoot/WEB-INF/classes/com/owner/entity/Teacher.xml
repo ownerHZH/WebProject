@@ -94,17 +94,17 @@
 		   values
           <foreach collection="teachers" item="item" index="index" separator=",">
                (
-		           #{user_name},
-		           #{teacher_code},
-		           #{role_code},
-		           #{user_password},
-		           #{teacher_name},
-		           #{teacher_sex},
-		           #{teacher_birthday},
-		           #{teacher_academic},
-		           #{teacher_degree},
-		           #{teacher_title},
-		           #{teacher_character})
+		           #{user_name,jdbcType=VARCHAR},
+		           #{teacher_code,jdbcType=VARCHAR},
+		           #{role_code,jdbcType=INTEGER},
+		           #{user_password,jdbcType=VARCHAR},
+		           #{teacher_name,jdbcType=VARCHAR},
+		           #{teacher_sex,jdbcType=VARCHAR},
+		           #{teacher_birthday,jdbcType=TIMESTAMP},
+		           #{teacher_academic,jdbcType=VARCHAR},
+		           #{teacher_degree,jdbcType=VARCHAR},
+		           #{teacher_title,jdbcType=VARCHAR},
+		           #{teacher_character,jdbcType=INTEGER})
           </foreach> 
     </insert>
 	

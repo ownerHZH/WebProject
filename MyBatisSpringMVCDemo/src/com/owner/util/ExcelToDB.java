@@ -97,15 +97,43 @@ public class ExcelToDb {
 		{
 			Teacher teacher=new Teacher();
 			Cell[] rowCell=sheet.getRow(i);
-			for(int t=0;t<titleCell.length;t++)
-			{									
-				setValueT(rowCell[t],titleCell[t],teacher);					
-			}
+			if(judgeCell(rowCell))
+			{
+				continue;
+			}else
+			{
+				for(int t=0;t<titleCell.length;t++)
+				{									
+					setValueT(rowCell[t],titleCell[t],teacher);					
+				}	
+			}			
 			teachers.add(teacher);							
 		}
 		return teachers;
 	}
 	
+	
+	/**
+	 * 判断rowCell是否为空
+	 * @param rowCell
+	 * @return true 空  false 不为空
+	 */
+	private boolean judgeCell(Cell[] rowCell) {
+		int f=0;
+		for(int i=0;i<rowCell.length;i++)
+		{
+			if(rowCell[i].getContents().trim().equals(null)||rowCell[i].getContents().trim().equals(""))
+			{
+				f++;
+			}
+		}
+		if(f==rowCell.length)
+		{
+			return true;
+		}
+		return false;
+	}
+
 	/**
 	 * 读取excel表单中sheet1的数据，保存到Major列表
 	 * excel必须有第一行的与数据库表一一对应的字段标题
