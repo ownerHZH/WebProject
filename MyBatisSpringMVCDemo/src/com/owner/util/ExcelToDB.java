@@ -23,18 +23,18 @@ import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 
-public class ExcelToDb {
+public class ExcelToDB {
 
 	private File sourcefile;
 	private String name;
-	public ExcelToDb(File filename,String name)
+	public ExcelToDB(File filename,String name)
 	{
 		this.sourcefile=filename;
 		this.name=name;		
 	}
 	
 	public static void main(String[] args) {
-		ExcelToDb e=new ExcelToDb(new File("D:/teachers.xls"),"teacher");
+		ExcelToDB e=new ExcelToDB(new File("D:/teachers.xls"),"teacher");
 		try {
 			@SuppressWarnings("unchecked")
 			List<Teacher> majors = (List<Teacher>) e.getList();

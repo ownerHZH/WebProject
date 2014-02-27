@@ -46,7 +46,7 @@
 
 
 	
-	<bean id="userDAO" class="com.owner.dao.impl.UserDAOImpl">
+	<!-- <bean id="userDAO" class="com.owner.dao.impl.UserDAOImpl">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
 	</bean>
 	<bean id="menuLevelOneDAO" class="com.owner.dao.impl.MenuLevelOneDAOImpl">
@@ -67,6 +67,6 @@
 	</bean>
 	<bean id="teacherDAO" class="com.owner.dao.impl.TeacherDAOImpl">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
-	</bean>
+	</bean> -->
 
 </beans>

@@ -8,18 +8,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.owner.dao.IMajorDAO;
 import com.owner.entity.Major;
+import com.owner.service.IMajorService;
 
 @Controller
 public class MajorController {
-	@Resource(name = "majorDAO")
-	private IMajorDAO majorDAO;
+	
+	@Resource(name = "majorService")
+	private IMajorService majorService;
 	
 	//获取专业列表
 	@RequestMapping("/professional-introduction")
 	public ModelAndView professional_introduction() {
-		List<Major> majors=majorDAO.getAllMajor();
+		List<Major> majors=majorService.getMajorList();
 		return new ModelAndView("professional-introduction","majors",majors);
 	}
 	

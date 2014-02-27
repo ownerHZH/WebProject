@@ -2,6 +2,8 @@ package com.owner.dao.impl;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Repository;
@@ -13,6 +15,7 @@ import com.owner.entity.MenuLevelTwo;
 @Repository(value = "menuLevelTwoDAO")
 @Transactional
 public class MenuLevelTwoDAOImpl implements IMenuLevelTwoDAO {
+	@Resource(name="sqlSessionFactory")
 	private SqlSessionFactory sqlSessionFactory;
 
 	public SqlSessionFactory getSqlSessionFactory() {

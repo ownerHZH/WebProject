@@ -2,19 +2,21 @@ package com.owner.dao.impl;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.owner.dao.IMenuLevelOneDAO;
-import com.owner.dao.IUserDAO;
 import com.owner.entity.MenuLevelOne;
-import com.owner.entity.UserTable;
 
 @Repository(value = "menuLevelOneDAO")
 @Transactional
 public class MenuLevelOneDAOImpl implements IMenuLevelOneDAO {
+	
+	@Resource(name="sqlSessionFactory")
 	private SqlSessionFactory sqlSessionFactory;
 
 	public SqlSessionFactory getSqlSessionFactory() {

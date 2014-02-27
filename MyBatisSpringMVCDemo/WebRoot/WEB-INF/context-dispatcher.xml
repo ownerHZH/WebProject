@@ -14,7 +14,7 @@
        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 	<!-- 使用注解的包，包括子集 -->
-	<context:component-scan base-package="com.owner.controller" />
+	<context:component-scan base-package="com.owner" />
 	<!-- 通过注解，把URL映射到Controller上，该标签默认注册DefaultAnnotationHandlerMapping和AnnotationMethodHandlerAdapter -->
 	<mvc:annotation-driven />
 	

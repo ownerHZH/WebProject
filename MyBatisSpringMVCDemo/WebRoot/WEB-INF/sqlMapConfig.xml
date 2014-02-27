@@ -3,7 +3,6 @@
 <configuration>
 	<!-- 别名 -->
 	<typeAliases>
-		<typeAlias type="com.owner.entity.UserTable" alias="UserTable"/>
 		<typeAlias type="com.owner.entity.MenuLevelOne" alias="MenuLevelOne"/>
 		<typeAlias type="com.owner.entity.MenuLevelTwo" alias="MenuLevelTwo"/>
 		<typeAlias type="com.owner.entity.MenuLevelThree" alias="MenuLevelThree"/>
@@ -12,8 +11,7 @@
 		<typeAlias type="com.owner.entity.Major" alias="Major"/>
 		<typeAlias type="com.owner.entity.Teacher" alias="Teacher"/>
 	</typeAliases>
-	 <mappers>  
-      <mapper resource="com/owner/entity/UserTable.xml" />  
+	 <mappers>   
       <mapper resource="com/owner/entity/MenuLevelOne.xml" />
       <mapper resource="com/owner/entity/MenuLevelTwo.xml" />
       <mapper resource="com/owner/entity/MenuLevelThree.xml" />
