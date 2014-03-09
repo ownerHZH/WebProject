@@ -35,7 +35,7 @@ public class ApplicationContextBean
       public static   void getconn() {
          // TODO Auto-generated method stub
          // Create a variable for the connection string.
-         String connectionUrl = "jdbc:sqlserver://localhost:1433;database=book_system_database;integratedSecurity=false;user=sa;password=root;";
+         String connectionUrl = "jdbc:sqlserver://localhost:1433;database=RepositoryDB;integratedSecurity=false;user=sa;password=699074;";
    
          // Declare the JDBC objects.
          Connection con = null;
@@ -48,7 +48,7 @@ public class ApplicationContextBean
              con = DriverManager.getConnection(connectionUrl);
    
              // Create and execute an SQL statement that returns some data.
-             String SQL = "SELECT [menu_level_one_id],[role_code],[menu_level_one_name],[mapping_page] FROM [book_system_database].[dbo].[menulevelone]";
+             String SQL = "SELECT [menu_level_one_id],[role_code],[menu_level_one_name],[mapping_page] FROM [RepositoryDB].[dbo].[menulevelone]";
              stmt = con.createStatement();
              rs = stmt.executeQuery(SQL);
    
