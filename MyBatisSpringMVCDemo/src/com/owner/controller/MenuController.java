@@ -38,7 +38,7 @@ public class MenuController {
 		
     	List<MenuLevelTwo> menuLevelTwoList=menuService.getMenuLevelTwoAndThreeByMenuLevelOneCode(1);
 
-		return new ModelAndView("ssystem-maintenance","menulist",menuLevelTwoList);
+		return new ModelAndView("systemmaintenance/ssystem-maintenance","menulist",menuLevelTwoList);
 	}
 	
 	@RequestMapping("/curriculum-system")
