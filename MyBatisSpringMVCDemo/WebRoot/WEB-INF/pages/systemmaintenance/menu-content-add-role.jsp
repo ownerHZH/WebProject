@@ -28,14 +28,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				   url: "addRole.html",
 				   data: {
 				            role_name:$("#role_name").val(),
-				            role_comment:$("#role_comment").val()
+				            remarks:$("#remarks").val()
 				         },
 				   success: function(msg,status){
 				     if(status=="success"&&msg=="true")
 				     {
 				        alert("数据添加成功");
 				        $("#role_name").val("");
-				        $("#role_comment").val("");
+				        $("#remarks").val("");
 				     }
 				   }
 				});
@@ -57,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	          
 	          <div>
 	              备注：
-	              <input type="text"  name="role_comment" id="role_comment" />
+	              <input type="text"  name="remarks" id="remarks" />
 	          </div>
 	          
 	          <div><input type="button" value="提交" id="submit" /></div>

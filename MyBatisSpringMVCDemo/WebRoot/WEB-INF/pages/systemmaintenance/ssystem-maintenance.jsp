@@ -26,19 +26,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</style>
 	
 	<script type="text/javascript">	 
-
-        var firstUlLi=null;
+        //firstUlLi 树结构菜单的根节点对象   firstLi 树结构菜单根节点的第一个子菜单项对象
+        var firstUlLi=null,firstLi=null;
 		$(document).ready(function() {
+		    //动态生成树结构菜单
 			creatMenuLi();
+			//Jquery TreeView控件的初始化
 			$("#tree").treeview({
 				collapsed : true,
 				animated : "medium",
 				persist : "location",
 				unique:true
 			});
+			//初始时让树结构菜单的第一项展开
 			$(firstUlLi).children().eq(0).click();	
+			//初始时让树结构菜单的第一项的的子菜单执行点击事件
+			$(firstLi).click();
 		});
 
+        /**
+        *动态生成树结构菜单函数
+        *Jquery树结构如下：
+        * <ul> -->跟节点
+             <li><a>menuName</a>
+                <ul>
+                   <li>item1</li>
+                   <li>item2</li>
+                   <li>item3</li>
+                </ul>
+             </li>
+          </ul> 
+        **/
 		function creatMenuLi() {
 			var oneul = $("#tree");
 			<c:forEach items="${menulist}" var="menu" varStatus="status1">				
@@ -51,6 +69,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var twoul = $("<ul></ul>");
 			<c:forEach items="${menu.menuLevelThreeList}" var="menu_two" varStatus="status2">
 			var twoli = $("<li></li>");
+			if("${status1.count}"=="1"&&"${status2.count}"=="1")
+	        {
+	           firstLi=twoli;
+	        }			
 			twoli.text("${menu_two.menu_level_three_name}");
 			twoli.click(function() {
 				$("#iframe").attr("src", "${menu_two.mapping_page}");
@@ -67,46 +89,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>   
 <div id="menu" class="menu">
    <ul id="tree">
-      <!-- <li><a>用户管理</a>
-          <ul>
-	          <li>添加角色</li>
-	          <li>角色权限设置</li>
-	          <li>教师用户导入</li>
-	          <li>学生用户导入</li>
-	          <li>添加/修改用户</li>
-	          <li>修改密码</li>
-          </ul>
-      </li>
-      <li><a>专业方向</a>
-         <ul>
-	          <li>添加角色</li>
-	          <li>角色权限设置</li>
-	          <li>教师用户导入</li>
-	          <li>学生用户导入</li>
-	          <li>添加/修改用户</li>
-	          <li>修改密码</li>
-          </ul>
-      </li>
-      <li><a>课程性质</a>
-          <ul>
-	          <li>添加角色</li>
-	          <li>角色权限设置</li>
-	          <li>教师用户导入</li>
-	          <li>学生用户导入</li>
-	          <li>添加/修改用户</li>
-	          <li>修改密码</li>
-          </ul>
-      </li>
-      <li><a>题型管理</a>
-          <ul>
-	          <li>添加角色</li>
-	          <li>角色权限设置</li>
-	          <li>教师用户导入</li>
-	          <li>学生用户导入</li>
-	          <li>添加/修改用户</li>
-	          <li>修改密码</li>
-          </ul>
-      </li> -->
    </ul>
 </div>
 

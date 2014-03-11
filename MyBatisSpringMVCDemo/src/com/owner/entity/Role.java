@@ -4,7 +4,7 @@ public class Role {
 	
 	private int role_code;      //角色编号
 	private String role_name;//角色名称
-	private String role_comment;//角色备注
+	private String remarks;//角色备注
 	
 	public int getRole_code() {
 		return role_code;
@@ -18,16 +18,17 @@ public class Role {
 	public void setRole_name(String role_name) {
 		this.role_name = role_name;
 	}
-	public String getRole_comment() {
-		return role_comment;
+	public String getRemarks() {
+		return remarks;
 	}
-	public void setRole_comment(String role_comment) {
-		this.role_comment = role_comment;
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
 	}
 	@Override
 	public String toString() {
 		return "Role [role_code=" + role_code + ", role_name=" + role_name
-				+ ", role_comment=" + role_comment + "]";
+				+ ", remarks=" + remarks + "]";
 	}
+
 
 }

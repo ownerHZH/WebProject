@@ -5,13 +5,13 @@
 	<resultMap type="Role" id="roleMap">
 		<id property="role_code" column="role_code"></id>
 		<id property="role_name" column="role_name"></id>
-		<id property="role_comment" column="role_comment"></id>
+		<id property="remarks" column="remarks"></id>
 	</resultMap>
 	<select id="getRoleById" parameterType="Role" resultMap="roleMap">
 		select 
 		   role_code,
 		   role_name,
-		   role_comment 
+		   remarks 
 		 from role 
 		   where role_code=#{role_code}
 	</select>
@@ -20,19 +20,19 @@
 		select 
 		   role_code,
 		   role_name,
-		   role_comment 
+		   remarks 
 		 from role 
 	</select>
 	
 	<insert id="addRole" parameterType="Role">
-		insert into role(role_code,role_name,role_comment) 
-		   values(#{role_code},#{role_name},#{role_comment})
+		insert into role(role_code,role_name,remarks) 
+		   values(#{role_code},#{role_name,jdbcType=VARCHAR},#{remarks,jdbcType=VARCHAR})
 	</insert>
 	
 	<update id="updateRole" parameterType="Role">
 		update role set 
-		   role_name=#{role_name},
-		   role_comment=#{role_comment}
+		   role_name=#{role_name,jdbcType=VARCHAR},
+		   remarks=#{remarks,jdbcType=VARCHAR}
 		 where 
 		   role_code=#{role_code}
 	</update>
