@@ -18,6 +18,7 @@ public class ApplicationContextBean
     context = new ClassPathXmlApplicationContext( CONFIG_FILE_NAME );
   }*/
 
+	
   
   public static void main( String[] args )
   {
