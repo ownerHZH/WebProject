@@ -8,4 +8,12 @@
     <loc>https://ownerhzh.github.io/WebProject/articles/</loc>
     <changefreq>weekly</changefreq>
   </url>
+  <url>
+    <loc>https://ownerhzh.github.io/WebProject/fable-52-store/</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://ownerhzh.github.io/WebProject/fable-52-store/en.html</loc>
+    <changefreq>weekly</changefreq>
+  </url>
 </urlset>
